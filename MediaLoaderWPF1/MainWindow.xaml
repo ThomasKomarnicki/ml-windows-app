@@ -1,0 +1,14 @@
+﻿<Window x:Class="MediaLoaderWPF1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MediaLoaderWPF1"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="347.058" Width="519.118">
+    <Grid>
+        <Label x:Name="label" Content="Video Directories" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="addDirectoryButton" Content="Add Directory" HorizontalAlignment="Left" Margin="410,6,0,0" VerticalAlignment="Top" Width="91" Click="addDirectoryButton_Click"/>
+
+    </Grid>
+</Window>
