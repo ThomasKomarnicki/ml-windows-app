@@ -14,13 +14,17 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
 
+
 namespace MediaLoaderWPF1 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window {
+
+
         public MainWindow() {
             InitializeComponent();
+
         }
 
         private void addDirectoryButton_Click(object sender, RoutedEventArgs e) {
@@ -41,8 +45,14 @@ namespace MediaLoaderWPF1 {
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok) {
                 var folder = dlg.FileName;
-                // Do something with selected folder string
+                addDirectory(folder);
             }
+        }
+
+        private void addDirectory(String directory) {
+            Console.Write("selecte directory "+directory);
+
+            directoriesPanel.Children.Add(new DirectoryRowControl(directory, false));
         }
     }
 }

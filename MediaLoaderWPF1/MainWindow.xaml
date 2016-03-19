@@ -8,7 +8,8 @@
         Title="MainWindow" Height="347.058" Width="519.118">
     <Grid>
         <Label x:Name="label" Content="Video Directories" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="addDirectoryButton" Content="Add Directory" HorizontalAlignment="Left" Margin="410,6,0,0" VerticalAlignment="Top" Width="91" Click="addDirectoryButton_Click"/>
+        <Button x:Name="addDirectoryButton" Content="Add" HorizontalAlignment="Left" Margin="462,6,0,0" VerticalAlignment="Top" Width="39" Click="addDirectoryButton_Click"/>
+        <WrapPanel x:Name="directoriesPanel" HorizontalAlignment="Left" Height="277" VerticalAlignment="Top" Width="491" Margin="10,29,0,0"/>
 
     </Grid>
 </Window>
