@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -54,5 +55,13 @@ namespace MediaLoaderWPF1 {
 
             directoriesPanel.Children.Add(new DirectoryRowControl(directory, false));
         }
+
+        private List<FileSelection> loadFileSelections() {
+            List<FileSelection> fileSelections = new List<FileSelection>();
+
+
+            return fileSelections;
+        }
     }
+
 }

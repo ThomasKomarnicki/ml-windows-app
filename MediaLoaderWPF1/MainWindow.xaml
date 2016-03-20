@@ -5,11 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MediaLoaderWPF1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="347.058" Width="519.118">
+        Title="MainWindow" Height="347.058" Width="459.817" MinWidth="400">
     <Grid>
-        <Label x:Name="label" Content="Video Directories" HorizontalAlignment="Left" Margin="10,3,0,0" VerticalAlignment="Top" Width="100"/>
-        <Button x:Name="addDirectoryButton" Content="Add" HorizontalAlignment="Left" Margin="462,6,0,0" VerticalAlignment="Top" Width="39" Click="addDirectoryButton_Click"/>
-        <WrapPanel x:Name="directoriesPanel" HorizontalAlignment="Left" Height="277" VerticalAlignment="Top" Width="491" Margin="10,29,0,0"/>
+        <WrapPanel x:Name="directoriesPanel" Height="281" VerticalAlignment="Top" Margin="0,35,0,0" HorizontalAlignment="Left" Width="474"/>
+        <Grid x:Name="headerGrid" Height="35" VerticalAlignment="Top" Background="#FFC9F0F3">
+            <Grid.Effect>
+                <DropShadowEffect Direction="270" Opacity="0.2"/>
+            </Grid.Effect>
+            <Label x:Name="label" Content="Video Directories" Margin="10,4,205,0" VerticalAlignment="Top"/>
+            <Grid>
+                <Label x:Name="label1" Content="Include Sub-Folders" VerticalAlignment="Top" Margin="0,4,68,0" Height="24" HorizontalAlignment="Right" Width="185" HorizontalContentAlignment="Center"/>
+                <Button x:Name="addDirectoryButton" Content="Add" Margin="0,7,20,0" Click="addDirectoryButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="43"/>
+            </Grid>
+        </Grid>
 
     </Grid>
+
+
 </Window>

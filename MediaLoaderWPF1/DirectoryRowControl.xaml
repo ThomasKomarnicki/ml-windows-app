@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="40" d:DesignWidth="491">
     <Grid>
-        <Label x:Name="directoryPath" Content="Directory Path Goes Here" HorizontalAlignment="Left" Margin="0,6" Width="364"/>
-        <CheckBox x:Name="includeSubDirs" Content="" HorizontalAlignment="Left" Margin="386,13,0,0" VerticalAlignment="Top" Height="16" Width="18" RenderTransformOrigin="0.611,1.688" Checked="includeSubDirs_Checked" Unchecked="includeSubDirs_Checked"/>
-        <Button x:Name="deleteButton" Content="Del" HorizontalAlignment="Left" Margin="438,10,0,0" VerticalAlignment="Top" Width="32" Click="deleteButton_Click"/>
+        <Label x:Name="directoryPath" Content="Directory Path Goes Here" HorizontalAlignment="Left" Margin="0,6" Width="345"/>
+        <CheckBox x:Name="includeSubDirs" Content="" HorizontalAlignment="Left" Margin="345,13,0,0" VerticalAlignment="Top" Height="16" Width="18" RenderTransformOrigin="0.611,1.688" Checked="includeSubDirs_Checked" Unchecked="includeSubDirs_Checked"/>
+        <Button x:Name="deleteButton" Content="Del" HorizontalAlignment="Left" Margin="437,10,0,0" VerticalAlignment="Top" Width="32" Click="deleteButton_Click"/>
 
     </Grid>
 </UserControl>
