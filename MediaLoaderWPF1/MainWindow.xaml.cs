@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using MediaLoaderWPF1.model;
 
 
 namespace MediaLoaderWPF1 {
@@ -22,10 +23,25 @@ namespace MediaLoaderWPF1 {
     /// </summary>
     public partial class MainWindow : Window {
 
+        private UserFileSelections userFileSelections;
 
         public MainWindow() {
             InitializeComponent();
 
+            userFileSelections = loadFileSelections();
+            addFileSelectionRows();
+        }
+
+        public void saveUserSelections() {
+            userFileSelections.saveToFile();
+        }
+
+        public void onFileSelectionRemoved(FileSelection fileSelection) {
+
+        }
+
+        public void onFileSelectionChanged(FileSelection fileSelection) {
+            saveUserSelections();
         }
 
         private void addDirectoryButton_Click(object sender, RoutedEventArgs e) {
@@ -53,14 +69,33 @@ namespace MediaLoaderWPF1 {
         private void addDirectory(String directory) {
             Console.Write("selecte directory "+directory);
 
-            directoriesPanel.Children.Add(new DirectoryRowControl(directory, false));
+            FileSelection fileSelection = new FileSelection(directory, false);
+            userFileSelections.fileSelections.Add(fileSelection);
+
+            DirectoryRowControl control = new DirectoryRowControl(fileSelection);
+            control.setMainWindow(this);
+            directoriesPanel.Children.Add(control);
+
+            userFileSelections.saveToFile();
         }
 
-        private List<FileSelection> loadFileSelections() {
-            List<FileSelection> fileSelections = new List<FileSelection>();
+        private UserFileSelections loadFileSelections() {
+            UserFileSelections userFileSelectios = new UserFileSelections();
+
+            userFileSelectios.loadFromFile();
 
 
-            return fileSelections;
+            return userFileSelectios;
+        }
+
+        private void addFileSelectionRows() {
+            directoriesPanel.Children.Clear();
+            foreach (FileSelection fileSelection in userFileSelections.fileSelections) {
+                DirectoryRowControl control = new DirectoryRowControl(fileSelection);
+                control.setMainWindow(this);
+                directoriesPanel.Children.Add(control);
+
+            }
         }
     }
 

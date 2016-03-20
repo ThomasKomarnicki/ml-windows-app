@@ -5,11 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaLoaderWPF1"
              mc:Ignorable="d" 
-             d:DesignHeight="40" d:DesignWidth="491">
+             d:DesignHeight="40" MinWidth="520" MaxWidth="520">
     <Grid>
-        <Label x:Name="directoryPath" Content="Directory Path Goes Here" HorizontalAlignment="Left" Margin="0,6" Width="345"/>
-        <CheckBox x:Name="includeSubDirs" Content="" HorizontalAlignment="Left" Margin="345,13,0,0" VerticalAlignment="Top" Height="16" Width="18" RenderTransformOrigin="0.611,1.688" Checked="includeSubDirs_Checked" Unchecked="includeSubDirs_Checked"/>
-        <Button x:Name="deleteButton" Content="Del" HorizontalAlignment="Left" Margin="437,10,0,0" VerticalAlignment="Top" Width="32" Click="deleteButton_Click"/>
+        <Label x:Name="directoryPath" Content="Directory Path Goes Here" Margin="0,6,165,6" Panel.ZIndex="1" HorizontalAlignment="Left"/>
+        <Grid Height="40" Margin="0,0,1,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="185">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="9*"/>
+                <RowDefinition Height="11*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="deleteButton" Content="Del" Margin="0,10,33,0" VerticalAlignment="Top" Click="deleteButton_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Width="28" RenderTransformOrigin="-0.071,0.65"/>
+            <CheckBox x:Name="includeSubDirs" Content="" Margin="26,14,0,0" VerticalAlignment="Top" Height="16" RenderTransformOrigin="0.611,1.688" Checked="includeSubDirs_Checked" Unchecked="includeSubDirs_Checked" HorizontalAlignment="Left" Width="24" Grid.RowSpan="2"/>
+        </Grid>
 
     </Grid>
 </UserControl>

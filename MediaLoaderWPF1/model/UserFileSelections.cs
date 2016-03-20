@@ -10,9 +10,10 @@ using Newtonsoft.Json;
 namespace MediaLoaderWPF1.model {
     class UserFileSelections {
 
-        private string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "user_file_selections.json");
+        private string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");
+        private string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
 
-        List<FileSelection> fileSelections;
+        public List<FileSelection> fileSelections;
 
         public UserFileSelections() {
 
@@ -20,14 +21,19 @@ namespace MediaLoaderWPF1.model {
 
 
         public void saveToFile() {
-
+            if (!File.Exists(fileLocation)) {
+                Directory.CreateDirectory(appDataDir);
+            }
+            File.WriteAllText(fileLocation, JsonConvert.SerializeObject(fileSelections));
         }
 
         public void loadFromFile() {
-            if (!File.Exists(fileLocation)) { 
+            if (File.Exists(fileLocation)) { 
                 String fileContents = File.ReadAllText(fileLocation);
                 fileSelections = JsonConvert.DeserializeObject<List<FileSelection>>(fileContents);
                 Console.WriteLine(fileSelections.ToString());
+            } else {
+                fileSelections = new List<FileSelection>();
             }
         }
         
