@@ -24,18 +24,31 @@ namespace MediaLoaderWPF1.model {
             if (!File.Exists(fileLocation)) {
                 Directory.CreateDirectory(appDataDir);
             }
-            File.WriteAllText(fileLocation, JsonConvert.SerializeObject(fileSelections));
+            // File.WriteAllText(fileLocation, "{\"selections\":"+JsonConvert.SerializeObject(fileSelections)+"}");
+            File.WriteAllText(fileLocation,  JsonConvert.SerializeObject(new SelectionsWrapper(fileSelections)));
         }
 
         public void loadFromFile() {
             if (File.Exists(fileLocation)) { 
                 String fileContents = File.ReadAllText(fileLocation);
-                fileSelections = JsonConvert.DeserializeObject<List<FileSelection>>(fileContents);
+                fileSelections = JsonConvert.DeserializeObject<SelectionsWrapper>(fileContents).selections;
                 Console.WriteLine(fileSelections.ToString());
             } else {
                 fileSelections = new List<FileSelection>();
             }
         }
+
+        public int remove(FileSelection fileSelection) {
+            for(int i = 0; i < fileSelections.Count; i++) {
+                if(Object.ReferenceEquals(fileSelections.ElementAt(i), fileSelection)) {
+                    fileSelections.RemoveAt(i);
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
         
     }
 }

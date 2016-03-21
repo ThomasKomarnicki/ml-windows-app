@@ -8,14 +8,14 @@ namespace MediaLoaderWPF1 {
     public class FileSelection {
         private string _directoryPath;
 
-        public string DirectoryPath {
+        public string directoryPath {
             get { return _directoryPath; }
             set { _directoryPath = value; }
         }
 
         private bool _includeSubDirs;
 
-        public bool IncludeSubDirs {
+        public bool includeSubDirs {
             get { return _includeSubDirs; }
             set { _includeSubDirs = value; }
         }

@@ -28,8 +28,8 @@ namespace MediaLoaderWPF1 {
 
         public DirectoryRowControl(FileSelection fileSelection) {
             InitializeComponent();
-            directoryPath.Content = fileSelection.DirectoryPath;
-            includeSubDirs.IsChecked = fileSelection.IncludeSubDirs;
+            directoryPath.Content = fileSelection.directoryPath;
+            includeSubDirs.IsChecked = fileSelection.includeSubDirs;
             _fileSelection = fileSelection;
         }
 
@@ -39,7 +39,7 @@ namespace MediaLoaderWPF1 {
 
         private void includeSubDirs_Checked(object sender, RoutedEventArgs e) {
             Console.WriteLine("checkbox checked");
-            _fileSelection.IncludeSubDirs = includeSubDirs.IsChecked.Value;
+            _fileSelection.includeSubDirs = includeSubDirs.IsChecked.Value;
             _mainWindow.onFileSelectionChanged(_fileSelection);
 
         }

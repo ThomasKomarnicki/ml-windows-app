@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using MediaLoaderWPF1.model;
 
@@ -37,7 +38,10 @@ namespace MediaLoaderWPF1 {
         }
 
         public void onFileSelectionRemoved(FileSelection fileSelection) {
-
+            int index = userFileSelections.remove(fileSelection);
+            // remove panel from directoriesPanel at index
+            directoriesPanel.Children.RemoveAt(index);
+            userFileSelections.saveToFile();
         }
 
         public void onFileSelectionChanged(FileSelection fileSelection) {
@@ -96,6 +100,11 @@ namespace MediaLoaderWPF1 {
                 directoriesPanel.Children.Add(control);
 
             }
+        }
+
+        private void startService() {
+            ProcessStartInfo startInfo = new ProcessStartInfo("\\nssm\\win64\\nssm.exe", "");
+
         }
     }
 
