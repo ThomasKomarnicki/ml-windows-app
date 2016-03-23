@@ -7,6 +7,7 @@ using System.Net;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace MediaLoaderWPF1 {
     class SimpleHttpServer {
@@ -141,7 +142,18 @@ namespace MediaLoaderWPF1 {
                 }
             }
 
-            private void Process(HttpListenerContext context) {
+         private void Process(HttpListenerContext context) {
+            string url = context.Request.Url.AbsolutePath;
+
+            if (Regex.Match(url, "^/ping/?$").Success) {
+                processPing(context);
+            }else if(Regex.Match(url, "^/data/?$").Success) {
+                ProcessData(context);
+            } else if(Regex.Match(url, "^/media/.*$").Success) {
+                ProcessMediaRequest(context);
+            }
+    
+
                 string filename = context.Request.Url.AbsolutePath;
                 Console.WriteLine(filename);
                 filename = filename.Substring(1);
@@ -186,6 +198,18 @@ namespace MediaLoaderWPF1 {
 
                 context.Response.OutputStream.Close();
             }
+
+        private void processPing(HttpListenerContext context) {
+
+        }
+
+        private void ProcessData(HttpListenerContext context) {
+
+        }
+
+        private void ProcessMediaRequest(HttpListenerContext context) {
+
+        }
 
             private void Initialize(string path, int port) {
                 this._rootDirectory = path;
