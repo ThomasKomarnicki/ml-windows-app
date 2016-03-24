@@ -91,63 +91,56 @@ namespace MediaLoaderWPF1 {
             {".zip", "application/zip"},
             #endregion
         };
-            private Thread _serverThread;
-            private string _rootDirectory;
-            private HttpListener _listener;
-            private int _port;
 
-            public int Port {
-                get { return _port; }
-                private set { }
-            }
+        private Thread _serverThread;
+        private string _rootDirectory;
+        private HttpListener _listener;
+        private int _port;
 
-            /// <summary>
-            /// Construct server with given port.
-            /// </summary>
-            /// <param name="path">Directory path to serve.</param>
-            /// <param name="port">Port of the server.</param>
-            /*public SimpleHttpServer(string path, int port) {
-                this.Initialize(path, port);
-            }*/
+        public int Port {
+            get { return _port; }
+            private set { }
+        }
 
-            /// <summary>
-            /// Construct server with suitable port.
-            /// </summary>
-            /// <param name="path">Directory path to serve.</param>
-            public SimpleHttpServer(string path, UserFileSelections userFileSelections) {
-                this.userFileSelections = userFileSelections;
-                //get an empty port
-                TcpListener l = new TcpListener(IPAddress.Loopback, 0);
-                l.Start();
-                int port = 8988;
-                l.Stop();
-                this.Initialize(path, port);
-            }
 
-            /// <summary>
-            /// Stop server and dispose all functions.
-            /// </summary>
-            public void Stop() {
-                _serverThread.Abort();
-                _listener.Stop();
-            }
+        /// <summary>
+        /// Construct server with suitable port.
+        /// </summary>
+        /// <param name="path">Directory path to serve.</param>
+        public SimpleHttpServer(string path, UserFileSelections userFileSelections) {
+            this.userFileSelections = userFileSelections;
+            //get an empty port
+            TcpListener l = new TcpListener(IPAddress.Loopback, 0);
+            l.Start();
+            int port = 8988;
+            l.Stop();
+            this.Initialize(path, port);
+        }
 
-            private void Listen() {
-                _listener = new HttpListener();
-                //_listener.Prefixes.Add("http://*:" + _port.ToString() + "/");
-                _listener.Prefixes.Add("http://+:" + _port.ToString() + "/");
-                _listener.Start();
-                while (true) {
-                    try {
-                        HttpListenerContext context = _listener.GetContext();
-                        Process(context);
-                    } catch (Exception ex) {
+        /// <summary>
+        /// Stop server and dispose all functions.
+        /// </summary>
+        public void Stop() {
+            _serverThread.Abort();
+            _listener.Stop();
+        }
 
-                    }
+        private void Listen() {
+            _listener = new HttpListener();
+            //_listener.Prefixes.Add("http://*:" + _port.ToString() + "/");
+            _listener.Prefixes.Add("http://+:" + _port.ToString() + "/");
+            _listener.Start();
+            while (true) {
+                try {
+                    HttpListenerContext context = _listener.GetContext();
+                    Process(context);
+                } catch (Exception ex) {
+
                 }
             }
+        }
 
-         private void Process(HttpListenerContext context) {
+        private void Process(HttpListenerContext context) {
             string url = context.Request.Url.AbsolutePath;
 
             if (Regex.Match(url, "^/ping/?$").Success) {
@@ -158,63 +151,65 @@ namespace MediaLoaderWPF1 {
                 ProcessMediaRequest(context);
             }
     
+            string filename = context.Request.Url.AbsolutePath;
+            Console.WriteLine(filename);
+            filename = filename.Substring(1);
 
-                string filename = context.Request.Url.AbsolutePath;
-                Console.WriteLine(filename);
-                filename = filename.Substring(1);
-
-                if (string.IsNullOrEmpty(filename)) {
-                    foreach (string indexFile in _indexFiles) {
-                        if (File.Exists(Path.Combine(_rootDirectory, indexFile))) {
-                            filename = indexFile;
-                            break;
-                        }
+            if (string.IsNullOrEmpty(filename)) {
+                foreach (string indexFile in _indexFiles) {
+                    if (File.Exists(Path.Combine(_rootDirectory, indexFile))) {
+                        filename = indexFile;
+                        break;
                     }
                 }
-
-                filename = Path.Combine(_rootDirectory, filename);
-
-                if (File.Exists(filename)) {
-                    try {
-                        Stream input = new FileStream(filename, FileMode.Open);
-
-                        //Adding permanent http response headers
-                        string mime;
-                        context.Response.ContentType = _mimeTypeMappings.TryGetValue(Path.GetExtension(filename), out mime) ? mime : "application/octet-stream";
-                        context.Response.ContentLength64 = input.Length;
-                        context.Response.AddHeader("Date", DateTime.Now.ToString("r"));
-                        context.Response.AddHeader("Last-Modified", System.IO.File.GetLastWriteTime(filename).ToString("r"));
-
-                        byte[] buffer = new byte[1024 * 16];
-                        int nbytes;
-                        while ((nbytes = input.Read(buffer, 0, buffer.Length)) > 0)
-                            context.Response.OutputStream.Write(buffer, 0, nbytes);
-                        input.Close();
-
-                        context.Response.StatusCode = (int)HttpStatusCode.OK;
-                        context.Response.OutputStream.Flush();
-                    } catch (Exception ex) {
-                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                    }
-
-                } else {
-                    context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-                }
-
-                context.Response.OutputStream.Close();
             }
+
+            filename = Path.Combine(_rootDirectory, filename);
+
+            if (File.Exists(filename)) {
+                try {
+                    Stream input = new FileStream(filename, FileMode.Open);
+
+                    //Adding permanent http response headers
+                    string mime;
+                    context.Response.ContentType = _mimeTypeMappings.TryGetValue(Path.GetExtension(filename), out mime) ? mime : "application/octet-stream";
+                    context.Response.ContentLength64 = input.Length;
+                    context.Response.AddHeader("Date", DateTime.Now.ToString("r"));
+                    context.Response.AddHeader("Last-Modified", System.IO.File.GetLastWriteTime(filename).ToString("r"));
+
+                    byte[] buffer = new byte[1024 * 16];
+                    int nbytes;
+                    while ((nbytes = input.Read(buffer, 0, buffer.Length)) > 0)
+                        context.Response.OutputStream.Write(buffer, 0, nbytes);
+                    input.Close();
+
+                    context.Response.StatusCode = (int)HttpStatusCode.OK;
+                    context.Response.OutputStream.Flush();
+                } catch (Exception ex) {
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                }
+
+            } else {
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
+
+            context.Response.OutputStream.Close();
+        }
 
         private void processPing(HttpListenerContext context) {
             ProcessTextResponse(context, "{\"status\":200, \"message\":\"OK\"}");
         }
 
         private void ProcessData(HttpListenerContext context) {
+            // todo get all files in each directory
             String data = JsonConvert.SerializeObject(new SelectionsWrapper(userFileSelections.fileSelections));
+            
             ProcessTextResponse(context, data);
         }
 
         private void ProcessMediaRequest(HttpListenerContext context) {
-
+            string url = context.Request.Url.AbsolutePath;
+            string filePath = url.Substring(6);
         }
 
         private void ProcessTextResponse(HttpListenerContext context, String data) {
@@ -230,13 +225,13 @@ namespace MediaLoaderWPF1 {
             output.Close();
         }
 
-            private void Initialize(string path, int port) {
-                this._rootDirectory = path;
-                this._port = port;
-                _serverThread = new Thread(this.Listen);
-                _serverThread.Start();
-            }
-
-
+        private void Initialize(string path, int port) {
+            this._rootDirectory = path;
+            this._port = port;
+            _serverThread = new Thread(this.Listen);
+            _serverThread.Start();
         }
+
+
     }
+}

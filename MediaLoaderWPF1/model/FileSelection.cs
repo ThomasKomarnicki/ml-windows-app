@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MediaLoaderWPF1 {
     public class FileSelection {
+        
         private string _directoryPath;
 
+        [JsonIgnore]
         public string directoryPath {
             get { return _directoryPath; }
             set { _directoryPath = value; }
