@@ -8,9 +8,13 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using MediaLoaderWPF1.model;
+using Newtonsoft.Json;
 
 namespace MediaLoaderWPF1 {
     class SimpleHttpServer {
+
+        private UserFileSelections userFileSelections;
 
         private readonly string[] _indexFiles = {
             "index.html",
@@ -102,19 +106,20 @@ namespace MediaLoaderWPF1 {
             /// </summary>
             /// <param name="path">Directory path to serve.</param>
             /// <param name="port">Port of the server.</param>
-            public SimpleHttpServer(string path, int port) {
+            /*public SimpleHttpServer(string path, int port) {
                 this.Initialize(path, port);
-            }
+            }*/
 
             /// <summary>
             /// Construct server with suitable port.
             /// </summary>
             /// <param name="path">Directory path to serve.</param>
-            public SimpleHttpServer(string path) {
+            public SimpleHttpServer(string path, UserFileSelections userFileSelections) {
+                this.userFileSelections = userFileSelections;
                 //get an empty port
                 TcpListener l = new TcpListener(IPAddress.Loopback, 0);
                 l.Start();
-                int port = ((IPEndPoint)l.LocalEndpoint).Port;
+                int port = 8988;
                 l.Stop();
                 this.Initialize(path, port);
             }
@@ -200,15 +205,29 @@ namespace MediaLoaderWPF1 {
             }
 
         private void processPing(HttpListenerContext context) {
-
+            ProcessTextResponse(context, "{\"status\":200, \"message\":\"OK\"}");
         }
 
         private void ProcessData(HttpListenerContext context) {
-
+            String data = JsonConvert.SerializeObject(new SelectionsWrapper(userFileSelections.fileSelections));
+            ProcessTextResponse(context, data);
         }
 
         private void ProcessMediaRequest(HttpListenerContext context) {
 
+        }
+
+        private void ProcessTextResponse(HttpListenerContext context, String data) {
+            context.Response.StatusCode = (int)HttpStatusCode.OK;
+
+            HttpListenerResponse response = context.Response;
+            byte[] buffer = Encoding.UTF8.GetBytes(data);
+
+            response.ContentLength64 = buffer.Length;
+            Stream output = response.OutputStream;
+            output.Write(buffer, 0, buffer.Length);
+            // You must close the output stream.
+            output.Close();
         }
 
             private void Initialize(string path, int port) {
