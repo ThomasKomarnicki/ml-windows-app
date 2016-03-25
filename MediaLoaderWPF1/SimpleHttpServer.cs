@@ -143,15 +143,20 @@ namespace MediaLoaderWPF1 {
         private void Process(HttpListenerContext context) {
             string url = context.Request.Url.AbsolutePath;
 
+            Console.WriteLine("starting processing " + url);
+
             if (Regex.Match(url, "^/ping/?$").Success) {
                 processPing(context);
             }else if(Regex.Match(url, "^/data/?$").Success) {
                 ProcessData(context);
             } else if(Regex.Match(url, "^/media/.*$").Success) {
                 ProcessMediaRequest(context);
+            } else {
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+                Console.WriteLine("could not process request " + url);
             }
     
-            string filename = context.Request.Url.AbsolutePath;
+            /*string filename = context.Request.Url.AbsolutePath;
             Console.WriteLine(filename);
             filename = filename.Substring(1);
 
@@ -193,7 +198,7 @@ namespace MediaLoaderWPF1 {
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
             }
 
-            context.Response.OutputStream.Close();
+            context.Response.OutputStream.Close();*/
         }
 
         private void processPing(HttpListenerContext context) {
@@ -212,6 +217,38 @@ namespace MediaLoaderWPF1 {
             string filePath = url.Substring(6);
 
             Console.WriteLine("Processing media request for "+filePath);
+
+            string fileLocation = userFileSelections.getRealPathOfFile(filePath);
+
+            if (File.Exists(fileLocation)) {
+                try {
+                    Stream input = new FileStream(fileLocation, FileMode.Open);
+
+                    //Adding permanent http response headers
+                    string mime;
+                    context.Response.ContentType = _mimeTypeMappings.TryGetValue(Path.GetExtension(fileLocation), out mime) ? mime : "application/octet-stream";
+                    context.Response.ContentLength64 = input.Length;
+                    context.Response.AddHeader("Date", DateTime.Now.ToString("r"));
+                    context.Response.AddHeader("Last-Modified", File.GetLastWriteTime(fileLocation).ToString("r"));
+
+                    byte[] buffer = new byte[1024 * 16];
+                    int nbytes;
+                    while ((nbytes = input.Read(buffer, 0, buffer.Length)) > 0)
+                        context.Response.OutputStream.Write(buffer, 0, nbytes);
+                    input.Close();
+
+                    context.Response.StatusCode = (int)HttpStatusCode.OK;
+                    context.Response.OutputStream.Flush();
+                } catch (Exception ex) {
+                    Console.WriteLine("not found");
+                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                }
+
+            } else {
+                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
+            }
+
+            context.Response.OutputStream.Close();
         }
 
         private void ProcessTextResponse(HttpListenerContext context, String data) {

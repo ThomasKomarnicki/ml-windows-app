@@ -49,6 +49,20 @@ namespace MediaLoaderWPF1.model {
             return -1;
         }
 
-        
+        public string getRealPathOfFile(string filePath) {
+            foreach(FileSelection fileSelection  in fileSelections) {
+                string groupName = fileSelection.groupName;
+
+                string filePathName = filePath.Substring(1, groupName.Length);
+                if (groupName.Equals(filePathName)) {
+                    foreach(Resource resource in fileSelection.resourceList) {
+
+                        string dir = fileSelection.directoryPath.Remove(fileSelection.directoryPath.Length - filePathName.Length);
+                        return dir + resource.location;
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
