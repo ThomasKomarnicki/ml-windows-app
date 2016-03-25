@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="model\Resource.cs" />
     <Compile Include="SimpleHttpServer.cs" />
     <Page Include="DirectoryRowControl.xaml">
       <SubType>Designer</SubType>

@@ -32,7 +32,7 @@ namespace MediaLoaderWPF1 {
             userFileSelections = loadFileSelections();
             addFileSelectionRows();
 
-            SimpleHttpServer server = new SimpleHttpServer("C:\\Users\\tdk10\\Downloads", userFileSelections);
+            SimpleHttpServer server = new SimpleHttpServer(userFileSelections);
         }
 
         public void saveUserSelections() {

@@ -107,14 +107,14 @@ namespace MediaLoaderWPF1 {
         /// Construct server with suitable port.
         /// </summary>
         /// <param name="path">Directory path to serve.</param>
-        public SimpleHttpServer(string path, UserFileSelections userFileSelections) {
+        public SimpleHttpServer(UserFileSelections userFileSelections) {
             this.userFileSelections = userFileSelections;
             //get an empty port
             TcpListener l = new TcpListener(IPAddress.Loopback, 0);
             l.Start();
             int port = 8988;
             l.Stop();
-            this.Initialize(path, port);
+            this.Initialize(port);
         }
 
         /// <summary>
@@ -210,6 +210,8 @@ namespace MediaLoaderWPF1 {
         private void ProcessMediaRequest(HttpListenerContext context) {
             string url = context.Request.Url.AbsolutePath;
             string filePath = url.Substring(6);
+
+            Console.WriteLine("Processing media request for "+filePath);
         }
 
         private void ProcessTextResponse(HttpListenerContext context, String data) {
@@ -225,8 +227,7 @@ namespace MediaLoaderWPF1 {
             output.Close();
         }
 
-        private void Initialize(string path, int port) {
-            this._rootDirectory = path;
+        private void Initialize(int port) {
             this._port = port;
             _serverThread = new Thread(this.Listen);
             _serverThread.Start();

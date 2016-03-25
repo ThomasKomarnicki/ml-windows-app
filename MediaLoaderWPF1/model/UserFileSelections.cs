@@ -31,7 +31,7 @@ namespace MediaLoaderWPF1.model {
         public void loadFromFile() {
             if (File.Exists(fileLocation)) { 
                 String fileContents = File.ReadAllText(fileLocation);
-                fileSelections = JsonConvert.DeserializeObject<SelectionsWrapper>(fileContents).selections;
+                fileSelections = JsonConvert.DeserializeObject<SelectionsWrapper>(fileContents).resourceGroups;
                 Console.WriteLine(fileSelections.ToString());
             } else {
                 fileSelections = new List<FileSelection>();

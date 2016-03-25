@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 namespace MediaLoaderWPF1.model {
 
     class SelectionsWrapper {
-        public List<FileSelection> selections;
+        public List<FileSelection> resourceGroups;
 
         public SelectionsWrapper(List<FileSelection> selections) {
-            this.selections = selections;
+            this.resourceGroups = selections;
         }
     }
 }
