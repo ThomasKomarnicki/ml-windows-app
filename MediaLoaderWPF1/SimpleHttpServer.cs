@@ -156,49 +156,6 @@ namespace MediaLoaderWPF1 {
                 Console.WriteLine("could not process request " + url);
             }
     
-            /*string filename = context.Request.Url.AbsolutePath;
-            Console.WriteLine(filename);
-            filename = filename.Substring(1);
-
-            if (string.IsNullOrEmpty(filename)) {
-                foreach (string indexFile in _indexFiles) {
-                    if (File.Exists(Path.Combine(_rootDirectory, indexFile))) {
-                        filename = indexFile;
-                        break;
-                    }
-                }
-            }
-
-            filename = Path.Combine(_rootDirectory, filename);
-
-            if (File.Exists(filename)) {
-                try {
-                    Stream input = new FileStream(filename, FileMode.Open);
-
-                    //Adding permanent http response headers
-                    string mime;
-                    context.Response.ContentType = _mimeTypeMappings.TryGetValue(Path.GetExtension(filename), out mime) ? mime : "application/octet-stream";
-                    context.Response.ContentLength64 = input.Length;
-                    context.Response.AddHeader("Date", DateTime.Now.ToString("r"));
-                    context.Response.AddHeader("Last-Modified", System.IO.File.GetLastWriteTime(filename).ToString("r"));
-
-                    byte[] buffer = new byte[1024 * 16];
-                    int nbytes;
-                    while ((nbytes = input.Read(buffer, 0, buffer.Length)) > 0)
-                        context.Response.OutputStream.Write(buffer, 0, nbytes);
-                    input.Close();
-
-                    context.Response.StatusCode = (int)HttpStatusCode.OK;
-                    context.Response.OutputStream.Flush();
-                } catch (Exception ex) {
-                    context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-                }
-
-            } else {
-                context.Response.StatusCode = (int)HttpStatusCode.NotFound;
-            }
-
-            context.Response.OutputStream.Close();*/
         }
 
         private void processPing(HttpListenerContext context) {
@@ -207,6 +164,7 @@ namespace MediaLoaderWPF1 {
 
         private void ProcessData(HttpListenerContext context) {
             // todo get all files in each directory
+            userFileSelections.loadFromFile();
             String data = JsonConvert.SerializeObject(new SelectionsWrapper(userFileSelections.fileSelections));
             
             ProcessTextResponse(context, data);

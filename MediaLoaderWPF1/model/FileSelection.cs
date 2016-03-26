@@ -52,27 +52,28 @@ namespace MediaLoaderWPF1 {
 
             _groupName = Path.GetFileName(_directoryPath);
 
+            reloadResourcesInFileSelection();
+
+        }
+
+        public void reloadResourcesInFileSelection() {
             _resourceList = new List<Resource>();
             string[] files = Directory.GetFiles(_directoryPath);
 
-            Console.WriteLine("***loading files from "+_directoryPath+"***");
+            Console.WriteLine("***loading files from " + _directoryPath + "***");
 
-            foreach(string file in files) {
+            foreach (string file in files) {
                 string extension = Path.GetExtension(file);
 
-                if(EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
+                if (EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
                     // add smart file path to _fileUrls
                     // replace path with _groupName up to _directoryPath
                     string fileUrl = file.Replace(_directoryPath, _groupName);
                     Resource resource = new Resource(fileUrl);
                     _resourceList.Add(resource);
-                    Console.WriteLine("fileUrl = "+resource.location);
+                    Console.WriteLine("fileUrl = " + resource.localLocation);
                 }
             }
-
-
-
-
         }
     }
 }

@@ -67,6 +67,14 @@
     <Reference Include="Gat.Controls.OpenDialog">
       <HintPath>..\..\..\..\Downloads\WPF-OpenDialog_1.1.1\Gat.Controls.OpenDialog.dll</HintPath>
     </Reference>
+    <Reference Include="Griffin.Core, Version=1.0.32.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Griffin.Framework.1.0.32\lib\net45\Griffin.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Griffin.WebServer, Version=0.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Griffin.WebServer.0.5.2\lib\net40\Griffin.WebServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
       <Private>True</Private>
@@ -99,6 +107,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="httpServer\GriffinHttpServer.cs" />
+    <Compile Include="httpServer\MainModule.cs" />
+    <Compile Include="httpServer\MediaFileService.cs" />
     <Compile Include="model\Resource.cs" />
     <Compile Include="SimpleHttpServer.cs" />
     <Page Include="DirectoryRowControl.xaml">

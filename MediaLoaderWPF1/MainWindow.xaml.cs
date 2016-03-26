@@ -1,21 +1,9 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using MediaLoaderWPF1.model;
+using MediaLoaderWPF1.httpServer;
 
 
 namespace MediaLoaderWPF1 {
@@ -32,7 +20,8 @@ namespace MediaLoaderWPF1 {
             userFileSelections = loadFileSelections();
             addFileSelectionRows();
 
-            SimpleHttpServer server = new SimpleHttpServer(userFileSelections);
+            //SimpleHttpServer server = new SimpleHttpServer(userFileSelections);
+            GriffinHttpServer server = new GriffinHttpServer(userFileSelections);
         }
 
         public void saveUserSelections() {
