@@ -107,6 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="httpServer\DataModule.cs" />
     <Compile Include="httpServer\GriffinHttpServer.cs" />
     <Compile Include="httpServer\MainModule.cs" />
     <Compile Include="httpServer\MediaFileService.cs" />

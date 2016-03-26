@@ -15,16 +15,13 @@ using Griffin.WebServer;
 namespace MediaLoaderWPF1.httpServer {
     class MainModule : IWorkerModule {
 
-         
         private readonly IFileService _fileService;
 
         public MainModule(IFileService fileService) {
             if (fileService == null) throw new ArgumentNullException("fileService");
             _fileService = fileService;
-            Console.WriteLine("started main module ");
+            Console.WriteLine(@"started main module ");
         }
-
-
 
         [Obsolete("Use 'AllowFileListing")]
         public bool ListFiles {
@@ -46,14 +43,14 @@ namespace MediaLoaderWPF1.httpServer {
 
         public void HandleRequestAsync(IHttpContext context, Action<IAsyncModuleResult> callback) {
             // just invoke the callback synchronously.
-            string url = context.Request.Uri.AbsolutePath;
-            Console.WriteLine("top level handeling async, " + url);
+            var url = context.Request.Uri.AbsolutePath;
+            //Console.WriteLine("top level handeling async, " + url);
             callback(new AsyncModuleResult(context, HandleRequest(context)));
         }
 
        public ModuleResult HandleRequest(IHttpContext context) {
-            string url = context.Request.Uri.AbsolutePath;
-            Console.WriteLine("top level handeling, " + url);
+            var url = context.Request.Uri.AbsolutePath;
+            Console.WriteLine(@"top level handeling, " + url);
 
             // only handle GET and HEAD
             if (!context.Request.HttpMethod.Equals("GET", StringComparison.OrdinalIgnoreCase)
@@ -105,7 +102,16 @@ namespace MediaLoaderWPF1.httpServer {
             var rangeStr = context.Request.Headers["Range"];
             if (!string.IsNullOrEmpty(rangeStr)) {
                 var ranges = new RangeCollection();
-                ranges.Parse(rangeStr, (int)fileContext.FileStream.Length);
+                Console.WriteLine(@"getting range for: "+rangeStr);
+                if (rangeStr.Equals("bytes=0-"))
+                {
+                    ranges.Parse("bytes=1-", (int)fileContext.FileStream.Length);
+                    //                    rangeStr = "bytes=" + ((int) fileContext.FileStream.Length/358) + "-";
+                }
+                else
+                {
+                    ranges.Parse(rangeStr, (int) fileContext.FileStream.Length);
+                }
                 context.Response.AddHeader("Content-Range", ranges.ToHtmlHeaderValue((int)fileContext.FileStream.Length));
                 context.Response.Body = new ByteRangeStream(ranges, fileContext.FileStream);
                 context.Response.ContentLength = ranges.TotalLength;

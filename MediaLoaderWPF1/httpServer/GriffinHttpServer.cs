@@ -18,9 +18,14 @@ namespace MediaLoaderWPF1.httpServer {
         public GriffinHttpServer(UserFileSelections userFileSelections) {
             var fileService = new MediaFileService(userFileSelections);
 
+            var moduleManager = new ModuleManager();
+
+            var dataModule = new DataModule(userFileSelections);
+            moduleManager.Add(dataModule);
+
             // Create the file module and allow files to be listed.
             var module = new MainModule(fileService) { AllowFileListing = true };
-            var moduleManager = new ModuleManager();
+
 
             moduleManager.Add(module);
 
