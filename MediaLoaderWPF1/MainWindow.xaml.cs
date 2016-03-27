@@ -23,8 +23,6 @@ namespace MediaLoaderWPF1 {
             addFileSelectionRows();
 
 
-            _server = new NancyServer();
-
         }
 
         public void saveUserSelections() {
@@ -74,7 +72,10 @@ namespace MediaLoaderWPF1 {
             control.setMainWindow(this);
             directoriesPanel.Children.Add(control);
 
+            fileSelection.CreateThumbnails();
+
             userFileSelections.SaveToFile();
+
         }
 
         private UserFileSelections loadFileSelections() {

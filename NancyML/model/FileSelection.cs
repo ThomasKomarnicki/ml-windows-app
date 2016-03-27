@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
+using NancyML.video;
 
 namespace NancyML.model {
     public class FileSelection {
@@ -12,7 +13,6 @@ namespace NancyML.model {
         
         private string _directoryPath;
 
-        [JsonIgnore]
         public string directoryPath {
             get { return _directoryPath; }
             set { _directoryPath = value; }
@@ -45,6 +45,11 @@ namespace NancyML.model {
             get { return _resourceList; }
         }
 
+        public FileSelection()
+        {
+            
+        }
+
         public FileSelection(string directoryPath, bool includeSubDirs) {
             _directoryPath = directoryPath;
             _includeSubDirs = includeSubDirs;
@@ -68,11 +73,28 @@ namespace NancyML.model {
                     // add smart file path to _fileUrls
                     // replace path with _groupName up to _directoryPath
                     string fileUrl = file.Replace(_directoryPath, _groupName);
-                    Resource resource = new Resource(fileUrl);
+                    Resource resource = new Resource(fileUrl, file);
                     _resourceList.Add(resource);
                     Console.WriteLine("fileUrl = " + resource.localLocation);
                 }
             }
+        }
+
+        public void CreateThumbnails()
+        {
+            ReloadResourcesInFileSelection();
+
+            foreach (var resource in _resourceList)
+            {
+                if (!VideoThumbnailConverter.ThumbnailExists(resource.FullLocalLocation))
+                {
+                    var thumbnailConverter = new VideoThumbnailConverter(resource.FullLocalLocation);
+                    resource.thumbnailLocation = thumbnailConverter.CreateThumbnail();
+                    Console.WriteLine("created thumbnail at "+resource.thumbnailLocation);
+                }
+
+            }
+
         }
     }
 }

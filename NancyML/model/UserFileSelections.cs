@@ -32,7 +32,7 @@ namespace NancyML.model {
             if (File.Exists(fileLocation)) { 
                 string fileContents = File.ReadAllText(fileLocation);
                 fileSelections = JsonConvert.DeserializeObject<SelectionsWrapper>(fileContents).resourceGroups;
-                Console.WriteLine(fileSelections.ToString());
+
             } else {
                 fileSelections = new List<FileSelection>();
             }
