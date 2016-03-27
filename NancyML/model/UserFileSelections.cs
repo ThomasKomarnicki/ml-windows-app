@@ -7,11 +7,11 @@ using System.IO;
 using Newtonsoft.Json;
 
 
-namespace MediaLoaderWPF1.model {
-    class UserFileSelections {
+namespace NancyML.model {
+    public class UserFileSelections {
 
-        private string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");
-        private string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
+        private readonly string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");
+        private readonly string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
 
         public List<FileSelection> fileSelections;
 
@@ -20,7 +20,7 @@ namespace MediaLoaderWPF1.model {
         }
 
 
-        public void saveToFile() {
+        public void SaveToFile() {
             if (!File.Exists(fileLocation)) {
                 Directory.CreateDirectory(appDataDir);
             }
@@ -28,9 +28,9 @@ namespace MediaLoaderWPF1.model {
             File.WriteAllText(fileLocation,  JsonConvert.SerializeObject(new SelectionsWrapper(fileSelections)));
         }
 
-        public void loadFromFile() {
+        public void LoadFromFile() {
             if (File.Exists(fileLocation)) { 
-                String fileContents = File.ReadAllText(fileLocation);
+                string fileContents = File.ReadAllText(fileLocation);
                 fileSelections = JsonConvert.DeserializeObject<SelectionsWrapper>(fileContents).resourceGroups;
                 Console.WriteLine(fileSelections.ToString());
             } else {
@@ -38,7 +38,7 @@ namespace MediaLoaderWPF1.model {
             }
         }
 
-        public int remove(FileSelection fileSelection) {
+        public int Remove(FileSelection fileSelection) {
             for(int i = 0; i < fileSelections.Count; i++) {
                 if(Object.ReferenceEquals(fileSelections.ElementAt(i), fileSelection)) {
                     fileSelections.RemoveAt(i);
@@ -49,7 +49,7 @@ namespace MediaLoaderWPF1.model {
             return -1;
         }
 
-        public string getRealPathOfFile(string filePath) {
+        public string GetRealPathOfFile(string filePath) {
             foreach(FileSelection fileSelection  in fileSelections) {
                 string groupName = fileSelection.groupName;
 
@@ -66,9 +66,9 @@ namespace MediaLoaderWPF1.model {
             return null;
         }
 
-        public void reloadResourcesInFileSelections() {
+        public void ReloadResourcesInFileSelections() {
             foreach(FileSelection fileSelection in fileSelections) {
-                fileSelection.reloadResourcesInFileSelection();
+                fileSelection.ReloadResourcesInFileSelection();
             }
         }
     }

@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using MediaLoaderWPF1.model;
-using MediaLoaderWPF1.httpServer;
+using NancyML;
+using NancyML.model;
 
 
 namespace MediaLoaderWPF1 {
@@ -14,25 +14,28 @@ namespace MediaLoaderWPF1 {
 
         private UserFileSelections userFileSelections;
 
+        private NancyServer _server;
+
         public MainWindow() {
             InitializeComponent();
 
             userFileSelections = loadFileSelections();
             addFileSelectionRows();
 
-            //SimpleHttpServer server = new SimpleHttpServer(userFileSelections);
-            GriffinHttpServer server = new GriffinHttpServer(userFileSelections);
+
+            _server = new NancyServer();
+
         }
 
         public void saveUserSelections() {
-            userFileSelections.saveToFile();
+            userFileSelections.SaveToFile();
         }
 
         public void onFileSelectionRemoved(FileSelection fileSelection) {
-            int index = userFileSelections.remove(fileSelection);
+            int index = userFileSelections.Remove(fileSelection);
             // remove panel from directoriesPanel at index
             directoriesPanel.Children.RemoveAt(index);
-            userFileSelections.saveToFile();
+            userFileSelections.SaveToFile();
         }
 
         public void onFileSelectionChanged(FileSelection fileSelection) {
@@ -71,13 +74,13 @@ namespace MediaLoaderWPF1 {
             control.setMainWindow(this);
             directoriesPanel.Children.Add(control);
 
-            userFileSelections.saveToFile();
+            userFileSelections.SaveToFile();
         }
 
         private UserFileSelections loadFileSelections() {
             UserFileSelections userFileSelectios = new UserFileSelections();
 
-            userFileSelectios.loadFromFile();
+            userFileSelectios.LoadFromFile();
 
 
             return userFileSelectios;

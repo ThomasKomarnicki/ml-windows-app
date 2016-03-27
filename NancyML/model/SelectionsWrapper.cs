@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MediaLoaderWPF1.model {
+namespace NancyML.model {
 
-    class SelectionsWrapper {
+    public class SelectionsWrapper {
         public List<FileSelection> resourceGroups;
 
         public SelectionsWrapper(List<FileSelection> selections) {

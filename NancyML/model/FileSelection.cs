@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
-using MediaLoaderWPF1.model;
 
-namespace MediaLoaderWPF1 {
+namespace NancyML.model {
     public class FileSelection {
 
         [JsonIgnore]
@@ -52,11 +51,11 @@ namespace MediaLoaderWPF1 {
 
             _groupName = Path.GetFileName(_directoryPath);
 
-            reloadResourcesInFileSelection();
+            //ReloadResourcesInFileSelection();
 
         }
 
-        public void reloadResourcesInFileSelection() {
+        public void ReloadResourcesInFileSelection() {
             _resourceList = new List<Resource>();
             string[] files = Directory.GetFiles(_directoryPath);
 
