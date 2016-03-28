@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using Nancy;
 using Nancy.Responses;
 using Newtonsoft.Json;
@@ -76,14 +77,16 @@ namespace NancyML.Modules {
                 _userFileSelections.ReloadResourcesInFileSelections();
                 Console.WriteLine(@"got data");
                 var data = JsonConvert.SerializeObject(new SelectionsWrapper(_userFileSelections.fileSelections));
-                
+                data = StripJsonOfFileData(data);
                 return Response.AsText(data, "application/json");
             };
         }
 
         private string StripJsonOfFileData(string jsonData)
         {
-            return null;
+            jsonData = Regex.Replace(jsonData, "\"thumbnailLocation(.*?)jpg\",?", "");
+//            return jsonData;
+            return Regex.Replace(jsonData, "\"directoryPath(.*?)\",", "");
         }
 
 
