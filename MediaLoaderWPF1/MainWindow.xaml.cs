@@ -1,6 +1,8 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Diagnostics;
+using System.Threading;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NancyML;
 using NancyML.model;
@@ -12,7 +14,7 @@ namespace MediaLoaderWPF1 {
     /// </summary>
     public partial class MainWindow : Window {
 
-        private UserFileSelections userFileSelections;
+        private readonly UserFileSelections userFileSelections;
 
         private NancyServer _server;
 
@@ -20,24 +22,25 @@ namespace MediaLoaderWPF1 {
             InitializeComponent();
 
             userFileSelections = loadFileSelections();
-            addFileSelectionRows();
+            AddFileSelectionRows();
 
 
         }
 
-        public void saveUserSelections() {
+        public void SaveUserSelections() {
             userFileSelections.SaveToFile();
         }
 
-        public void onFileSelectionRemoved(FileSelection fileSelection) {
+        public void OnFileSelectionRemoved(FileSelection fileSelection) {
             int index = userFileSelections.Remove(fileSelection);
             // remove panel from directoriesPanel at index
             directoriesPanel.Children.RemoveAt(index);
             userFileSelections.SaveToFile();
         }
 
-        public void onFileSelectionChanged(FileSelection fileSelection) {
-            saveUserSelections();
+        public void OnFileSelectionChanged(FileSelection fileSelection) {
+            UpdateModel(fileSelection);
+
         }
 
         private void addDirectoryButton_Click(object sender, RoutedEventArgs e) {
@@ -58,11 +61,11 @@ namespace MediaLoaderWPF1 {
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok) {
                 var folder = dlg.FileName;
-                addDirectory(folder);
+                AddDirectory(folder);
             }
         }
 
-        private void addDirectory(String directory) {
+        private void AddDirectory(String directory) {
             Console.Write("selecte directory "+directory);
 
             FileSelection fileSelection = new FileSelection(directory, false);
@@ -72,9 +75,11 @@ namespace MediaLoaderWPF1 {
             control.setMainWindow(this);
             directoriesPanel.Children.Add(control);
 
-            fileSelection.CreateThumbnails();
 
-            userFileSelections.SaveToFile();
+            UpdateModel(fileSelection);
+//            fileSelection.CreateThumbnails();
+//
+//            userFileSelections.SaveToFile();
 
         }
 
@@ -87,7 +92,7 @@ namespace MediaLoaderWPF1 {
             return userFileSelectios;
         }
 
-        private void addFileSelectionRows() {
+        private void AddFileSelectionRows() {
             directoriesPanel.Children.Clear();
             foreach (FileSelection fileSelection in userFileSelections.fileSelections) {
                 DirectoryRowControl control = new DirectoryRowControl(fileSelection);
@@ -97,10 +102,16 @@ namespace MediaLoaderWPF1 {
             }
         }
 
-        private void startService() {
-            ProcessStartInfo startInfo = new ProcessStartInfo("\\nssm\\win64\\nssm.exe", "");
-
+        private void UpdateModel(FileSelection fileSelection)
+        {
+            BackgroundWorker bw = new BackgroundWorker();
+            bw.DoWork += delegate {
+                fileSelection.CreateThumbnails();
+                SaveUserSelections();
+            };
+            bw.RunWorkerAsync();
         }
+
     }
 
 }

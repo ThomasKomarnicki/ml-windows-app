@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
+using System.Text.RegularExpressions;
 using NancyML.video;
 
 namespace NancyML.model {
@@ -10,7 +11,10 @@ namespace NancyML.model {
 
         [JsonIgnore]
         private List<string> EXTENSIONS = new List<string> { ".mp4", ".avi", ".mpeg", ".mpg", ".webm",".mkv", ".flv" };
-        
+
+        private string extensionsRegex = @".*\.(mp4|avi|mpg|mpeg|webm|mkv|flv)";
+
+
         private string _directoryPath;
 
         public string directoryPath {
@@ -62,14 +66,16 @@ namespace NancyML.model {
 
         public void ReloadResourcesInFileSelection() {
             _resourceList = new List<Resource>();
-            string[] files = Directory.GetFiles(_directoryPath);
+            SearchOption searchOption = _includeSubDirs ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+            string[] files = Directory.GetFiles(_directoryPath, "*", searchOption);
 
             Console.WriteLine("***loading files from " + _directoryPath + "***");
 
             foreach (string file in files) {
                 string extension = Path.GetExtension(file);
 
-                if (EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
+                if(Regex.Match(extension, extensionsRegex).Success) { 
+//                if (EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
                     // add smart file path to _fileUrls
                     // replace path with _groupName up to _directoryPath
                     string fileUrl = file.Replace(_directoryPath, _groupName);

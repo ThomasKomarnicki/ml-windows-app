@@ -39,9 +39,11 @@ namespace MediaLoaderWPF1 {
         }
 
         private void includeSubDirs_Checked(object sender, RoutedEventArgs e) {
-            Console.WriteLine("checkbox checked");
-            _fileSelection.includeSubDirs = includeSubDirs.IsChecked.Value;
-            _mainWindow.onFileSelectionChanged(_fileSelection);
+            if (_fileSelection != null)
+            {
+                _fileSelection.includeSubDirs = includeSubDirs.IsChecked.Value;
+                _mainWindow.onFileSelectionChanged(_fileSelection);
+            }
 
         }
 
