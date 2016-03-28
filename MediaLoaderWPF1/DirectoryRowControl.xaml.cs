@@ -42,13 +42,13 @@ namespace MediaLoaderWPF1 {
             if (_fileSelection != null)
             {
                 _fileSelection.includeSubDirs = includeSubDirs.IsChecked.Value;
-                _mainWindow.onFileSelectionChanged(_fileSelection);
+                _mainWindow.OnFileSelectionChanged(_fileSelection);
             }
 
         }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e) {
-            _mainWindow.onFileSelectionRemoved(_fileSelection);
+            _mainWindow.OnFileSelectionRemoved(_fileSelection);
         }
     }
 

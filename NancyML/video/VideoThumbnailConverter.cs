@@ -11,7 +11,7 @@ namespace NancyML.video {
     public class VideoThumbnailConverter
     {
 
-        private string _videoPath;
+        private readonly string _videoPath;
 
         public VideoThumbnailConverter(string videoFilePath)
         {
@@ -27,7 +27,10 @@ namespace NancyML.video {
         {
             string thumbnailPath = GetThumbnailPathForFile(_videoPath);
             var ffMpeg = new FFMpegConverter();
-            ffMpeg.GetVideoThumbnail(_videoPath, File.Create(thumbnailPath), 8);
+            FileStream fileStream = File.Create(thumbnailPath);
+            ffMpeg.GetVideoThumbnail(_videoPath, fileStream, 8);
+
+//            fileStream.Unlock(0,fileStream.Length);
 
             return thumbnailPath;
         }
