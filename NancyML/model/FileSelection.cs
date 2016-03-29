@@ -49,6 +49,15 @@ namespace NancyML.model {
             get { return _resourceList; }
         }
 
+        private int _thumbnailsCreated = 0;
+
+        [JsonIgnore]
+        public int ThumbnailsCreated
+        {
+            get { return _thumbnailsCreated; }
+            set { _thumbnailsCreated = value; }
+        }
+
         public FileSelection()
         {
             
@@ -86,8 +95,37 @@ namespace NancyML.model {
             }
         }
 
+        public bool HasAllThumbnails()
+        {
+            if (_includeSubDirs && _thumbnailsCreated == 2)
+            {
+                return true;
+            }
+            if (!_includeSubDirs && _thumbnailsCreated == 1)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void CreateThumbnails()
         {
+            if (_includeSubDirs && _thumbnailsCreated == 2)
+            {
+                return;
+            }
+            else if (!_includeSubDirs && _thumbnailsCreated == 1)
+            {
+                return;
+            } 
+            else if (_includeSubDirs && _thumbnailsCreated != 2)
+            {
+                _thumbnailsCreated = 2;
+            } 
+            else if (!_includeSubDirs && _thumbnailsCreated == 0)
+            {
+                _thumbnailsCreated = 1;
+            }
             ReloadResourcesInFileSelection();
 
             foreach (var resource in _resourceList)

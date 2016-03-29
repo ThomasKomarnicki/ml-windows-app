@@ -18,6 +18,8 @@ namespace MediaLoaderWPF1 {
 
         private NancyServer _server;
 
+        BackgroundWorker _backgroundWorker = new BackgroundWorker();
+
         public MainWindow() {
             InitializeComponent();
 
@@ -104,12 +106,16 @@ namespace MediaLoaderWPF1 {
 
         private void UpdateModel(FileSelection fileSelection)
         {
-            BackgroundWorker bw = new BackgroundWorker();
-            bw.DoWork += delegate {
-                fileSelection.CreateThumbnails();
-                SaveUserSelections();
-            };
-            bw.RunWorkerAsync();
+            if (!fileSelection.HasAllThumbnails())
+            {
+                _backgroundWorker = new BackgroundWorker();
+                _backgroundWorker.DoWork += delegate
+                {
+                    fileSelection.CreateThumbnails();
+                    SaveUserSelections();
+                };
+                _backgroundWorker.RunWorkerAsync();
+            }
         }
 
     }
