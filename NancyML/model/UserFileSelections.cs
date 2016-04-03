@@ -10,8 +10,10 @@ using Newtonsoft.Json;
 namespace NancyML.model {
     public class UserFileSelections {
 
-        private readonly string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");
-        private readonly string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
+//        private readonly string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");
+        public static readonly string fileLocation = Path.Combine("C:\\PCSync\\", "user_file_selections.json");
+//        private readonly string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
+        public static readonly string appDataDir = "C:\\PCSync\\";
 
         public List<FileSelection> fileSelections;
 
@@ -53,12 +55,18 @@ namespace NancyML.model {
             foreach(FileSelection fileSelection  in fileSelections) {
                 string groupName = fileSelection.groupName;
 
-                string filePathName = filePath.Substring(1, groupName.Length);
-                if (groupName.Equals(filePathName)) {
-                    foreach (Resource resource in fileSelection.resourceList) {
-                        if (Path.GetFileName(filePath).Equals(resource.name)) {
-                            string dir = fileSelection.directoryPath.Remove(fileSelection.directoryPath.Length - filePathName.Length);
-                            return dir + resource.localLocation;
+                if (filePath.Length > groupName.Length)
+                {
+                    string filePathName = filePath.Substring(1, groupName.Length);
+                    if (groupName.Equals(filePathName))
+                    {
+                        foreach (Resource resource in fileSelection.resourceList)
+                        {
+                            if (Path.GetFileName(filePath).Equals(resource.name))
+                            {
+                                string dir =fileSelection.directoryPath.Remove(fileSelection.directoryPath.Length -filePathName.Length);
+                                return dir + resource.localLocation;
+                            }
                         }
                     }
                 }

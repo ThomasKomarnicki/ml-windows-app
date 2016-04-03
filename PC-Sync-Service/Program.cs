@@ -5,7 +5,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MLService {
+namespace PC_Sync_Service {
     static class Program {
         /// <summary>
         /// The main entry point for the application.
@@ -14,7 +14,7 @@ namespace MLService {
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new PCSyncService(), 
             };
             ServiceBase.Run(ServicesToRun);
         }

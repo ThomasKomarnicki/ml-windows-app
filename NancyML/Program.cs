@@ -1,14 +1,39 @@
 ﻿using System;
+using log4net;
 using Nancy.Hosting.Self;
 using Topshelf;
+using Topshelf.Nancy;
 
 namespace NancyML {
     class Program {
 
         static void Main(string[] args) {
-            NancyServer server = new NancyServer();
+            //            NancyServer server = new NancyServer();
 
+            HostFactory.Run(x =>
+            {
+                x.Service<NancySelfHost>(s =>
+                {
+                    s.ConstructUsing(name => new NancySelfHost());
+                    s.WhenStarted(tc => tc.Start());
+                    s.WhenStopped(tc => tc.Stop());
+//                    s.WithNancyEndpoint(x, c =>
+//                    {
+//                        c.AddHost(port: 8988);
+//                        c.CreateUrlReservationsOnInstall();
+//                        c.OpenFirewallPortsOnInstall("PC Sync");
+//                    });
+                });
 
+                x.UseLog4Net();
+
+                x.RunAsLocalSystem();
+                x.StartAutomatically();
+                x.SetDescription("PC Sync Self Host");
+                x.SetDisplayName("PC Sync Self");
+                x.SetServiceName("PCSyncServer");
+            });
+            
         }
     }
 
@@ -19,6 +44,8 @@ namespace NancyML {
         public void Start() {
             _nancyHost = new NancyHost(new Uri("http://localhost:8988"));
             _nancyHost.Start();
+
+            LogManager.GetLogger("dog").Debug("debug test");
         }
 
         public void Stop() {
@@ -58,8 +85,6 @@ namespace NancyML {
             using (var host = new NancyHost(uri)) {
                 host.Start();
 
-                Console.WriteLine("Your application is running on " + uri);
-                Console.WriteLine("Press any [Enter] to close the host.");
 //                Console.ReadLine();
             }
         }

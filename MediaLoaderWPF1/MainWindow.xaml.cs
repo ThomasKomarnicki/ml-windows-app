@@ -26,6 +26,7 @@ namespace MediaLoaderWPF1 {
             userFileSelections = loadFileSelections();
             AddFileSelectionRows();
 
+//            new NetworkDemo();
 
         }
 

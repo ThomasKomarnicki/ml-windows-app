@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MLService")]
+[assembly: AssemblyTitle("PC-Sync-Service")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MLService")]
+[assembly: AssemblyProduct("PC-Sync-Service")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("167122cc-8bfe-4c14-af13-05ab130c04ff")]
+[assembly: Guid("e1376e43-bda9-4dde-b672-b8281ed64a88")]
 
 // Version information for an assembly consists of the following four values:
 //

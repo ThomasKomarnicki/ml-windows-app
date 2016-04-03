@@ -1,5 +1,5 @@
-﻿namespace MLService {
-    partial class Service1 {
+﻿namespace PC_Sync_Service {
+    partial class PCSyncService {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
@@ -24,14 +24,12 @@
         /// </summary>
         private void InitializeComponent() {
             // 
-            // Service1
+            // PCSyncService
             // 
-            this.ServiceName = "Service1";
+            this.ServiceName = "PCSyncService";
 
         }
 
         #endregion
-
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
