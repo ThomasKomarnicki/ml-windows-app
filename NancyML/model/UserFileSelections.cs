@@ -11,9 +11,11 @@ namespace NancyML.model {
     public class UserFileSelections {
 
 //        private readonly string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");
-        public static readonly string fileLocation = Path.Combine("C:\\PCSync\\", "user_file_selections.json");
+        public static readonly string fileLocation = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName) +"\\.user_file_selections.json";
 //        private readonly string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
-        public static readonly string appDataDir = "C:\\PCSync\\";
+        public static readonly string appDataDir = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+
+        public static readonly string logFile = "C:\\PCSyncLog.txt";
 
         public List<FileSelection> fileSelections;
 

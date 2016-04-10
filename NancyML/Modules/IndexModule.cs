@@ -75,6 +75,8 @@ namespace NancyML.Modules {
             {
                 _userFileSelections.LoadFromFile();
                 _userFileSelections.ReloadResourcesInFileSelections();
+//                File.WriteAllText(UserFileSelections.logFile, "getting data from: "+ UserFileSelections.appDataDir);
+                
                 Console.WriteLine(@"got data");
                 var data = JsonConvert.SerializeObject(new SelectionsWrapper(_userFileSelections.fileSelections));
                 data = StripJsonOfFileData(data);

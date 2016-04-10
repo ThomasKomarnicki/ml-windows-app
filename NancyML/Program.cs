@@ -17,12 +17,14 @@ namespace NancyML {
                     s.ConstructUsing(name => new NancySelfHost());
                     s.WhenStarted(tc => tc.Start());
                     s.WhenStopped(tc => tc.Stop());
-//                    s.WithNancyEndpoint(x, c =>
-//                    {
-//                        c.AddHost(port: 8988);
-//                        c.CreateUrlReservationsOnInstall();
-//                        c.OpenFirewallPortsOnInstall("PC Sync");
-//                    });
+                    s.WithNancyEndpoint(x, c =>
+                    {
+                        c.AddHost(port: 8988);
+                        
+                        c.CreateUrlReservationsOnInstall();
+                        c.ShouldOpenFirewallPorts = true;
+                        c.OpenFirewallPortsOnInstall("PC Sync");
+                    });
                 });
 
                 x.UseLog4Net();

@@ -39,7 +39,7 @@ namespace NancyML.video {
         public static string GetThumbnailPathForFile(string videoFile)
         {
             var hashCode = videoFile.GetHashCode();
-            return Path.Combine(UserFileSelections.appDataDir+".thumbnail\\", "."+hashCode +"_thumbnail.jpg");
+            return Path.Combine(UserFileSelections.appDataDir+"\\.thumbnail\\", "."+hashCode +"_thumbnail.jpg");
         }
 
         public static bool ThumbnailExists(string videoFile)
@@ -49,7 +49,7 @@ namespace NancyML.video {
 
         public static string GetThumbnailDirectory()
         {
-            return UserFileSelections.appDataDir+".thumbnail\\";
+            return UserFileSelections.appDataDir+"\\.thumbnail\\";
         }
 
     }

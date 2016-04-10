@@ -16,8 +16,6 @@ namespace MediaLoaderWPF1 {
 
         private readonly UserFileSelections userFileSelections;
 
-        private NancyServer _server;
-
         BackgroundWorker _backgroundWorker = new BackgroundWorker();
 
         public MainWindow() {
