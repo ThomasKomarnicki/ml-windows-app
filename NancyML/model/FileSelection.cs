@@ -63,9 +63,9 @@ namespace NancyML.model {
             
         }
 
-        public FileSelection(string directoryPath, bool includeSubDirs) {
+        public FileSelection(string directoryPath/*, bool includeSubDirs*/) {
             _directoryPath = directoryPath;
-            _includeSubDirs = includeSubDirs;
+            _includeSubDirs = true;
 
             _groupName = Path.GetFileName(_directoryPath);
 

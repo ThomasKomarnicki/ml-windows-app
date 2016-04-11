@@ -5,13 +5,19 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using MediaLoaderWPF1.Properties;
+using Hardcodet.Wpf.TaskbarNotification;
 
-namespace MediaLoaderWPF1 {
+namespace TrayApp {
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
     public partial class App : Application {
- 
+
+        private TaskbarIcon tb;
+
+        protected override void OnStartup(StartupEventArgs e) {
+            base.OnStartup(e);
+            tb = (TaskbarIcon)FindResource("MyNotifyIcon");
+        }
     }
 }

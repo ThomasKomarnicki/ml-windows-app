@@ -16,6 +16,8 @@ Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "SetupWizard", "SetupWizard\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallationCustomActionLib", "InstallationCustomActionLib\InstallationCustomActionLib.csproj", "{7516C059-4438-41E9-8383-5A4F11E60270}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrayApp", "TrayApp\TrayApp.csproj", "{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,12 @@ Global
 		{7516C059-4438-41E9-8383-5A4F11E60270}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7516C059-4438-41E9-8383-5A4F11E60270}.ServerDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7516C059-4438-41E9-8383-5A4F11E60270}.ServerDebug|Any CPU.Build.0 = Debug|Any CPU
+		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.ServerDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.ServerDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

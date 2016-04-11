@@ -2,7 +2,11 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Diagnostics;
+using System.Drawing;
 using System.Threading;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using NancyML;
 using NancyML.model;
@@ -20,6 +24,10 @@ namespace MediaLoaderWPF1 {
 
         public MainWindow() {
             InitializeComponent();
+
+
+//            TrayIcon.Icon = Properties.Resources.tray_ico;
+            
 
             userFileSelections = loadFileSelections();
             AddFileSelectionRows();
@@ -69,7 +77,7 @@ namespace MediaLoaderWPF1 {
         private void AddDirectory(String directory) {
             Console.Write("selecte directory "+directory);
 
-            FileSelection fileSelection = new FileSelection(directory, false);
+            FileSelection fileSelection = new FileSelection(directory);
             userFileSelections.fileSelections.Add(fileSelection);
 
             DirectoryRowControl control = new DirectoryRowControl(fileSelection);

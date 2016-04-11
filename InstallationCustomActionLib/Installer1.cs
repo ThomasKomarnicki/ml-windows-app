@@ -34,6 +34,7 @@ namespace InstallationCustomActionLib {
             install.Arguments = "install";
 
             install.FileName = filename;
+            install.Verb = "runas";
             install.WindowStyle = ProcessWindowStyle.Hidden;
             int exitCode;
 
@@ -47,6 +48,7 @@ namespace InstallationCustomActionLib {
             start.Arguments = "start";
 
             start.FileName = filename;
+            install.Verb = "runas";
             start.WindowStyle = ProcessWindowStyle.Hidden;
 
             using (Process proc = Process.Start(start)) {

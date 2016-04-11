@@ -14,7 +14,6 @@
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
             <Button x:Name="deleteButton" Content="Del" Margin="0,10,33,0" VerticalAlignment="Top" Click="deleteButton_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Width="28" RenderTransformOrigin="-0.071,0.65"/>
-            <CheckBox x:Name="includeSubDirs" Content="" Margin="26,14,0,0" VerticalAlignment="Top" Height="16" RenderTransformOrigin="0.611,1.688" Checked="includeSubDirs_Checked" Unchecked="includeSubDirs_Checked" HorizontalAlignment="Left" Width="24" Grid.RowSpan="2"/>
         </Grid>
 
     </Grid>

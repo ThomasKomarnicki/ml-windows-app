@@ -30,7 +30,7 @@ namespace MediaLoaderWPF1 {
         public DirectoryRowControl(FileSelection fileSelection) {
             InitializeComponent();
             directoryPath.Content = fileSelection.directoryPath;
-            includeSubDirs.IsChecked = fileSelection.includeSubDirs;
+//            includeSubDirs.IsChecked = fileSelection.includeSubDirs;
             _fileSelection = fileSelection;
         }
 
@@ -38,14 +38,14 @@ namespace MediaLoaderWPF1 {
             _mainWindow = mainWindow;
         }
 
-        private void includeSubDirs_Checked(object sender, RoutedEventArgs e) {
-            if (_fileSelection != null)
-            {
-                _fileSelection.includeSubDirs = includeSubDirs.IsChecked.Value;
-                _mainWindow.OnFileSelectionChanged(_fileSelection);
-            }
-
-        }
+//        private void includeSubDirs_Checked(object sender, RoutedEventArgs e) {
+//            if (_fileSelection != null)
+//            {
+//                _fileSelection.includeSubDirs = includeSubDirs.IsChecked.Value;
+//                _mainWindow.OnFileSelectionChanged(_fileSelection);
+//            }
+//
+//        }
 
         private void deleteButton_Click(object sender, RoutedEventArgs e) {
             _mainWindow.OnFileSelectionRemoved(_fileSelection);

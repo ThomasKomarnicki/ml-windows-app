@@ -8,8 +8,12 @@
         mc:Ignorable="d"
         Title="PC-Sync" Height="347.058" Width="480" MinWidth="520" MaxWidth="520">
     <Grid>
-        <tb:TaskbarIcon x:Name="NotificationIcon" 
-            ToolTipText="hello world" />
+        <Grid.Resources>
+            <local:ShowAppCommand x:Key="MessageCommand" />
+        </Grid.Resources>
+<!--        <tb:TaskbarIcon x:Name="TrayIcon" -->
+<!--            ToolTipText="PC-Sync" -->
+<!--                        LeftClickCommand="{StaticResource MessageCommand}"/>-->
         <WrapPanel x:Name="directoriesPanel" Margin="0,35,0,0" Orientation="Vertical"/>
         <Grid x:Name="headerGrid" Height="35" VerticalAlignment="Top" Background="#77c9dd">
             <Grid.Effect>
@@ -17,7 +21,6 @@
             </Grid.Effect>
             <Label x:Name="label" Content="Video Directories" Margin="10,4,205,0" VerticalAlignment="Top"/>
             <Grid>
-                <Label x:Name="label1" Content="Include Sub-Folders" VerticalAlignment="Top" Margin="0,4,72,0" Height="24" HorizontalAlignment="Right" Width="123" HorizontalContentAlignment="Center"/>
                 <Button x:Name="addDirectoryButton" Content="Add" Margin="0,7,16,0" Click="addDirectoryButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="43"/>
             </Grid>
         </Grid>
