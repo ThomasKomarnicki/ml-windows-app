@@ -5,6 +5,6 @@
 
     <tb:TaskbarIcon x:Key="MyNotifyIcon"
                   IconSource="/TrayIcon.ico"
-                  ToolTipText="hello world" />
+                  ToolTipText="PC-Sync"/>
 
 </ResourceDictionary>

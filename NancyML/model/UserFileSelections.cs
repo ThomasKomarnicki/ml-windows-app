@@ -60,11 +60,11 @@ namespace NancyML.model {
                 if (filePath.Length > groupName.Length)
                 {
                     string filePathName = filePath.Substring(1, groupName.Length);
-                    if (groupName.Equals(filePathName))
+                    if (groupName.Equals(filePathName, StringComparison.InvariantCultureIgnoreCase))
                     {
                         foreach (Resource resource in fileSelection.resourceList)
                         {
-                            if (Path.GetFileName(filePath).Equals(resource.name))
+                            if (Path.GetFileName(filePath).Equals(resource.name, StringComparison.InvariantCultureIgnoreCase))
                             {
                                 string dir =fileSelection.directoryPath.Remove(fileSelection.directoryPath.Length -filePathName.Length);
                                 return dir + resource.localLocation;

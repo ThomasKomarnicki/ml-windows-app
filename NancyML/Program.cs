@@ -11,9 +11,9 @@ namespace NancyML {
     class Program {
 
         static void Main(string[] args) {
-            //            NancyServer server = new NancyServer();
+            NancyServer server = new NancyServer();
 
-            Host host = HostFactory.New(x =>
+            /*Host host = HostFactory.New(x =>
             {
 
                 x.Service<NancySelfHost>(s =>
@@ -40,7 +40,9 @@ namespace NancyML {
                 x.SetDisplayName("PC Sync Service");
                 x.SetServiceName("PCSyncService");
             });
-            host.Run();
+            host.Run();*/
+
+
 
         }
     }
@@ -98,7 +100,7 @@ namespace NancyML {
             using (var host = new NancyHost(uri)) {
                 host.Start();
 
-//                Console.ReadLine();
+                Console.ReadLine();
             }
         }
     }

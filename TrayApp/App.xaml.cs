@@ -18,6 +18,13 @@ namespace TrayApp {
         protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
             tb = (TaskbarIcon)FindResource("MyNotifyIcon");
+            if (tb != null)
+            {
+                ShowCommand command = new ShowCommand();
+                tb.DoubleClickCommand = command;
+                tb.LeftClickCommand = command;
+            }
+        
         }
     }
 }

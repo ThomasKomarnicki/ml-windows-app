@@ -12,7 +12,7 @@ namespace NancyML.model {
         [JsonIgnore]
         private List<string> EXTENSIONS = new List<string> { ".mp4", ".avi", ".mpeg", ".mpg", ".webm",".mkv", ".flv" };
 
-        private string extensionsRegex = @".*\.(mp4|avi|mpg|mpeg|webm|mkv|flv)";
+        private string extensionsRegex = @".*\.((?i)(mp4|avi|mpg|mpeg|webm|mkv|flv))";
 
 
         private string _directoryPath;
