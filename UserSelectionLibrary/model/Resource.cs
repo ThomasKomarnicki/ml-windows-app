@@ -1,10 +1,10 @@
 ﻿using System;
 using System.IO;
-using NancyML.video;
+using UserSelectionLibrary.video;
 using Newtonsoft.Json;
 
 
-namespace NancyML.model {
+namespace UserSelectionLibrary.model {
 
     public class Resource {
 

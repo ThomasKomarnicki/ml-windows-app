@@ -7,7 +7,7 @@ using System.IO;
 using Newtonsoft.Json;
 
 
-namespace NancyML.model {
+namespace UserSelectionLibrary.model {
     public class UserFileSelections {
 
 //        private readonly string fileLocation = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\", "user_file_selections.json");

@@ -1,15 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Diagnostics;
-using System.Drawing;
-using System.Threading;
-using System.Windows.Controls;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using NancyML;
-using NancyML.model;
+using UserSelectionLibrary.model;
 
 
 namespace MediaLoaderWPF1 {

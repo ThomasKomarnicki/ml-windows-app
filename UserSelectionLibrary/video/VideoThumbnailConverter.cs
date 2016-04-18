@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NancyML.model;
+using UserSelectionLibrary.model;
 using NReco.VideoConverter;
 
-namespace NancyML.video {
+namespace UserSelectionLibrary.video {
 
     public class VideoThumbnailConverter
     {

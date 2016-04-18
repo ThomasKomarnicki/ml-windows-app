@@ -23,8 +23,14 @@ namespace TrayApp {
             if (main == null)
             {
                 main = new MediaLoaderWPF1.MainWindow();
+                main.Closed += Main_Closed;
             }
             main.Show();
+        }
+
+        private void Main_Closed(object sender, EventArgs e)
+        {
+            main = null;
         }
 
         public event EventHandler CanExecuteChanged;

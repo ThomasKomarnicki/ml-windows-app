@@ -4,9 +4,9 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text.RegularExpressions;
-using NancyML.video;
+using UserSelectionLibrary.video;
 
-namespace NancyML.model {
+namespace UserSelectionLibrary.model {
     public class FileSelection {
 
         [JsonIgnore]

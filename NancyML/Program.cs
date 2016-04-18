@@ -1,19 +1,47 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using log4net;
 using Nancy.Hosting.Self;
-using NancyML.model;
+using UserSelectionLibrary.model;
 using Topshelf;
 using Topshelf.HostConfigurators;
 using Topshelf.Nancy;
+using TrayApp;
 
 namespace NancyML {
     class Program {
 
-        static void Main(string[] args) {
-            NancyServer server = new NancyServer();
 
-            /*Host host = HostFactory.New(x =>
+        static void Main(string[] args) {
+            //            TrayApp.App app = new TrayApp.App();
+            //            app.InitializeComponent();
+            //            app.Run();
+
+//            var filename = "TrayApp.exe";
+//            //            File.WriteAllText("C:\\PCSyncLog.txt", "installing executable at " + filename);
+//
+//            ProcessStartInfo install = new ProcessStartInfo();
+//            install.Arguments = "install";
+//
+//            install.FileName = filename;
+//            install.WindowStyle = ProcessWindowStyle.Hidden;
+//            int exitCode;
+//
+//            using (Process proc = Process.Start(install)) {
+////                proc.WaitForExit();
+////
+////                exitCode = proc.ExitCode;
+//            }
+
+
+//            NancyServer server = new NancyServer();
+
+
+
+
+            Host host = HostFactory.New(x =>
             {
 
                 x.Service<NancySelfHost>(s =>
@@ -40,9 +68,7 @@ namespace NancyML {
                 x.SetDisplayName("PC Sync Service");
                 x.SetServiceName("PCSyncService");
             });
-            host.Run();*/
-
-
+            host.Run();
 
         }
     }
@@ -52,20 +78,14 @@ namespace NancyML {
 //        private NancyHost _nancyHost;
 
         public void Start() {
-            File.WriteAllText(UserFileSelections.logFile, "service started");
-                
-//            var config = new HostConfiguration();
-//            config.RewriteLocalhost = false;
-//            _nancyHost = new NancyHost(config,new Uri("http://localhost:8988"));
-//            _nancyHost.Start();
-//
-//            LogManager.GetLogger("dog").Debug("debug test");
+            File.AppendAllText(UserFileSelections.logFile, @"service started - ");
+
         }
 
         public void Stop() {
             //            _nancyHost.Stop();
             //            Console.WriteLine("Stopped. Good bye!");
-            File.WriteAllText(UserFileSelections.logFile, "service stopped");
+            File.AppendAllText(UserFileSelections.logFile, @"service stopped - ");
         }
     }
 

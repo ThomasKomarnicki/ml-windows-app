@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InstallationCustomActionLib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrayApp", "TrayApp\TrayApp.csproj", "{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserSelectionLibrary", "UserSelectionLibrary\UserSelectionLibrary.csproj", "{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,12 @@ Global
 		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.Release|Any CPU.Build.0 = Release|Any CPU
 		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.ServerDebug|Any CPU.ActiveCfg = Debug|Any CPU
 		{27FA3EB7-A9C9-4E83-AD0B-582B2595B635}.ServerDebug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}.ServerDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5F33C4D-DD3B-4002-B58A-A38DC4F1687E}.ServerDebug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

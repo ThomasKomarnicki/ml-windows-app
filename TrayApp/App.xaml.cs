@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
+using Microsoft.Win32;
 
 namespace TrayApp {
     /// <summary>
@@ -24,7 +25,17 @@ namespace TrayApp {
                 tb.DoubleClickCommand = command;
                 tb.LeftClickCommand = command;
             }
-        
+
+            AddToStartupRegistry();
+
+        }
+
+        private void AddToStartupRegistry()
+        {
+            RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+
+            rk.SetValue("PC-Sync", System.Reflection.Assembly.GetExecutingAssembly().Location);
+
         }
     }
 }

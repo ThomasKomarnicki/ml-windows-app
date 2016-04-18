@@ -156,7 +156,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <None Include="app.manifest" />
+    <None Include="app.manifest">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -180,16 +182,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\NancyML\NancyML.csproj">
-      <Project>{35460aa4-b94a-4b64-9418-7243ec3d2f01}</Project>
-      <Name>NancyML</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Icons\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ic_tv_white_18dp_1x.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserSelectionLibrary\UserSelectionLibrary.csproj">
+      <Project>{c5f33c4d-dd3b-4002-b58a-a38dc4f1687e}</Project>
+      <Name>UserSelectionLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
