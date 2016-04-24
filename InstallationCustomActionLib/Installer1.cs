@@ -28,7 +28,7 @@ namespace InstallationCustomActionLib {
             base.Commit(savedState);
 
             string path = this.Context.Parameters["targetdir"];
-            var filename = path + "\\NancyML.exe";
+            var filename = path + "\\lib\\NancyML.exe";
 //            File.WriteAllText("C:\\PCSyncLog.txt", "installing executable at " + filename);
 
             ProcessStartInfo install = new ProcessStartInfo();
@@ -90,10 +90,10 @@ namespace InstallationCustomActionLib {
 //            bw.RunWorkerAsync();
 
             Directory.SetCurrentDirectory(path);
-            filename = this.Context.Parameters["targetdir"] + "TrayApp.exe";
+            filename = this.Context.Parameters["targetdir"] + "lib\\TrayApp.exe";
             Process.Start(filename);
 
-            filename = this.Context.Parameters["targetdir"] + "MediaLoaderWPF1.exe";
+            filename = this.Context.Parameters["targetdir"] + "lib\\MediaLoaderWPF1.exe";
             Process.Start(filename);
 
         }
@@ -108,7 +108,7 @@ namespace InstallationCustomActionLib {
             base.Uninstall(savedState);
 
             string path = this.Context.Parameters["targetdir"];
-            var filename = path + "\\NancyML.exe";
+            var filename = path + "\\lib\\NancyML.exe";
 
             ProcessStartInfo uninstall = new ProcessStartInfo();
             uninstall.Arguments = "uninstall";

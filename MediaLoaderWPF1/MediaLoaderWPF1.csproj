@@ -193,6 +193,12 @@
       <Name>UserSelectionLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_add_white_24dp_1x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ic_remove_black_24dp_1x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

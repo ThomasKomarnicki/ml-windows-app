@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Hardcodet.Wpf.TaskbarNotification;
 using Microsoft.Win32;
+using UserSelectionLibrary.model;
 
 namespace TrayApp {
     /// <summary>
@@ -18,23 +20,41 @@ namespace TrayApp {
 
         protected override void OnStartup(StartupEventArgs e) {
             base.OnStartup(e);
-            tb = (TaskbarIcon)FindResource("MyNotifyIcon");
-            if (tb != null)
+            try
             {
-                ShowCommand command = new ShowCommand();
-                tb.DoubleClickCommand = command;
-                tb.LeftClickCommand = command;
-            }
+                tb = (TaskbarIcon) FindResource("MyNotifyIcon");
+                if (tb != null)
+                {
+                    ShowCommand command = new ShowCommand();
+                    tb.DoubleClickCommand = command;
+                    tb.LeftClickCommand = command;
+                }
 
-            AddToStartupRegistry();
+                AddToStartupRegistry();
+            }
+            catch (Exception exception)
+            {
+//                File.AppendAllText(UserFileSelections.logFile, @" tray app startup error "+exception.StackTrace);
+//                Console.Write(exception.StackTrace);
+            }
 
         }
 
         private void AddToStartupRegistry()
         {
-            RegistryKey rk = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run", true);
+            try
+            {
+//                RegistryKey rk = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                RegistryKey rk = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
 
-            rk.SetValue("PC-Sync", System.Reflection.Assembly.GetExecutingAssembly().Location);
+                rk.SetValue("dog-pc-sync", System.Reflection.Assembly.GetExecutingAssembly().Location);
+                File.AppendAllText(UserFileSelections.logFile, @" added to registery - ");
+            }
+            catch (Exception e)
+            {
+//                File.AppendAllText(UserFileSelections.logFile, @" add to registery error: "+e.Message);
+//                Console.WriteLine(e.Message);
+            }
 
         }
     }

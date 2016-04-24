@@ -13,7 +13,11 @@
                 <RowDefinition Height="9*"/>
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="deleteButton" Content="Del" Margin="0,10,33,0" VerticalAlignment="Top" Click="deleteButton_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Width="28" RenderTransformOrigin="-0.071,0.65"/>
+            <Button x:Name="deleteButton" Margin="0,7,33,0" VerticalAlignment="Top" Click="deleteButton_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Width="28" RenderTransformOrigin="-0.071,0.65" Background="{x:Null}" BorderBrush="{x:Null}">
+                <StackPanel>
+                    <Image Source="Resources/ic_remove_black_24dp_1x.png" Height="22" Width="26"/>
+                </StackPanel>
+            </Button>
         </Grid>
 
     </Grid>
