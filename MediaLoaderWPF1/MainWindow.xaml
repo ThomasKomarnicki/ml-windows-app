@@ -7,29 +7,52 @@
         xmlns:local="clr-namespace:MediaLoaderWPF1"
         mc:Ignorable="d"
         Title="PC-Sync" Height="347.058" Width="480" MinWidth="520" MaxWidth="520">
+
+    <Window.Resources>
+        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#22000000"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent">
+                                <ContentPresenter></ContentPresenter>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
         <Grid.Resources>
             <local:ShowAppCommand x:Key="MessageCommand" />
         </Grid.Resources>
-<!--        <tb:TaskbarIcon x:Name="TrayIcon" -->
-<!--            ToolTipText="PC-Sync" -->
-<!--                        LeftClickCommand="{StaticResource MessageCommand}"/>-->
+        <!--        <tb:TaskbarIcon x:Name="TrayIcon" -->
+        <!--            ToolTipText="PC-Sync" -->
+        <!--                        LeftClickCommand="{StaticResource MessageCommand}"/>-->
         <WrapPanel x:Name="directoriesPanel" Margin="0,35,0,0" Orientation="Vertical"/>
         <Grid x:Name="headerGrid" Height="35" VerticalAlignment="Top" Background="#6699cc">
-            <Grid.Effect>
-                <DropShadowEffect Direction="270" Opacity="0.2"/>
-            </Grid.Effect>
             <Label x:Name="label" Content="Video Directories" Margin="10,4,205,0" VerticalAlignment="Top" Foreground="White"/>
             <Grid>
-                <Button x:Name="addDirectoryButton" Margin="0,7,16,0" Click="addDirectoryButton_Click" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="43" Background="{x:Null}" BorderThickness="1" BorderBrush="{x:Null}">
-                    <StackPanel>
-                        <Image Source="Resources/ic_add_white_24dp_1x.png" Height="20" Width="20"/>
+                <Button Style="{StaticResource TransparentStyle}" x:Name="addDirectoryButton" Margin="0,0,17,0" Click="addDirectoryButton_Click" Height="35" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="35" Background="{x:Null}" BorderThickness="1" BorderBrush="{x:Null}">
+                    <StackPanel >
+                        <Image Source="Resources/ic_add_white_24dp_1x.png" Height="33" Width="20" Margin="5,0"/>
                     </StackPanel>
                 </Button>
             </Grid>
         </Grid>
 
     </Grid>
-
+   
 
 </Window>

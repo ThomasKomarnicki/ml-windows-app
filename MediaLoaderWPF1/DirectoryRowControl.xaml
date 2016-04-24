@@ -5,7 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MediaLoaderWPF1"
              mc:Ignorable="d" 
-             d:DesignHeight="40" MinWidth="520" MaxWidth="520">
+             d:DesignHeight="39" MinWidth="520" MaxWidth="520">
+    <UserControl.Resources>
+        <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border>
+                            <Border.Style>
+                                <Style TargetType="{x:Type Border}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#22000000"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <Grid Background="Transparent">
+                                <ContentPresenter></ContentPresenter>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid>
         <Label x:Name="directoryPath" Content="Directory Path Goes Here" Margin="0,6,165,6" Panel.ZIndex="1" HorizontalAlignment="Left"/>
         <Grid Height="40" Margin="0,0,1,0" VerticalAlignment="Top" HorizontalAlignment="Right" Width="185">
@@ -13,12 +38,13 @@
                 <RowDefinition Height="9*"/>
                 <RowDefinition Height="11*"/>
             </Grid.RowDefinitions>
-            <Button x:Name="deleteButton" Margin="0,7,33,0" VerticalAlignment="Top" Click="deleteButton_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Width="28" RenderTransformOrigin="-0.071,0.65" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button x:Name="deleteButton" Style="{StaticResource TransparentStyle}" Margin="0,0,33,0" VerticalAlignment="Top" Click="deleteButton_Click" Grid.RowSpan="2" HorizontalAlignment="Right" Width="33" RenderTransformOrigin="-0.071,0.65" Background="{x:Null}" BorderBrush="{x:Null}" Height="33">
                 <StackPanel>
-                    <Image Source="Resources/ic_remove_black_24dp_1x.png" Height="22" Width="26"/>
+                    <Image Source="Resources/ic_remove_black_24dp_1x.png" Height="35" Width="26" RenderTransformOrigin="0.462,0.455"/>
                 </StackPanel>
             </Button>
         </Grid>
 
     </Grid>
+    
 </UserControl>

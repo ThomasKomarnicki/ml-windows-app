@@ -20,8 +20,8 @@ namespace TrayApp {
 
         public void Execute(object parameter)
         {
-//            try
-//            {
+            try
+            {
                 // open WPF1
                 Console.WriteLine(@"tray clicked");
                 if (main == null)
@@ -30,9 +30,9 @@ namespace TrayApp {
                     main.Closed += Main_Closed;
                 }
                 main.Show();
-//            } catch (Exception exception) {
+            } catch (Exception exception) {
 //                File.AppendAllText(UserFileSelections.logFile, @" tray app startup error " + exception.StackTrace);
-//            }
+            }
         }
 
         private void Main_Closed(object sender, EventArgs e)
