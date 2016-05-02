@@ -81,5 +81,10 @@ namespace UserSelectionLibrary.model {
                 fileSelection.ReloadResourcesInFileSelection();
             }
         }
+
+        public bool Has(string directory)
+        {
+            return fileSelections.Any(fileSelection => fileSelection.directoryPath.Equals(directory));
+        }
     }
 }

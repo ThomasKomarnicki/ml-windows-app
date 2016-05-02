@@ -83,18 +83,22 @@ namespace MediaLoaderWPF1 {
         }
 
         private void AddDirectory(String directory) {
-            Console.Write(@"selected directory "+directory);
 
-            FileSelection fileSelection = new FileSelection(directory);
-            userFileSelections.fileSelections.Add(fileSelection);
+            if (!userFileSelections.Has(directory))
+            {
+                Console.Write(@"selected directory " + directory);
 
-            DirectoryRowControl control = new DirectoryRowControl(fileSelection);
-            control.setMainWindow(this);
-            directoriesPanel.Children.Add(control);
+                FileSelection fileSelection = new FileSelection(directory);
+                userFileSelections.fileSelections.Add(fileSelection);
+
+                DirectoryRowControl control = new DirectoryRowControl(fileSelection);
+                control.setMainWindow(this);
+                directoriesPanel.Children.Add(control);
 
 
-            UpdateModel(fileSelection);
-            ConfigMessage();
+                UpdateModel(fileSelection);
+                ConfigMessage();
+            }
 
         }
 
