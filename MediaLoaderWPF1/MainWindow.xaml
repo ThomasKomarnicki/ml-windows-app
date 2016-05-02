@@ -51,6 +51,7 @@
                 </Button>
             </Grid>
         </Grid>
+        <Label x:Name="AddFoldersLabel" Content="Add folders with videos you want to stream to your Android TV" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="-0.474,-0.462"/>
 
     </Grid>
    

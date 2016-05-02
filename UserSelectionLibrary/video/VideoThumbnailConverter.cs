@@ -29,7 +29,15 @@ namespace UserSelectionLibrary.video {
             string thumbnailPath = GetThumbnailPathForFile(_videoPath);
             var ffMpeg = new FFMpegConverter();
             FileStream fileStream = File.Create(thumbnailPath);
-            ffMpeg.GetVideoThumbnail(_videoPath, fileStream, 8);
+            try
+            {
+
+                ffMpeg.GetVideoThumbnail(_videoPath, fileStream, 8);
+            }
+            catch (FFMpegException e)
+            {
+                Console.WriteLine(e.Message);
+            }
 
 //            fileStream.Unlock(0,fileStream.Length);
 

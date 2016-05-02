@@ -75,22 +75,51 @@ namespace UserSelectionLibrary.model {
 
         public void ReloadResourcesInFileSelection() {
             _resourceList = new List<Resource>();
-            SearchOption searchOption = _includeSubDirs ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
-            string[] files = Directory.GetFiles(_directoryPath, "*", searchOption);
+//            SearchOption searchOption = SearchOption.AllDirectories;
+//            string[] files = Directory.GetFiles(_directoryPath, "*", searchOption);
 
-            Console.WriteLine("***loading files from " + _directoryPath + "***");
+            ApplyAllFiles(directoryPath, ProcessFile);
 
-            foreach (string file in files) {
-                string extension = Path.GetExtension(file);
+//            Console.WriteLine("***loading files from " + _directoryPath + "***");
 
-                if(Regex.Match(extension, extensionsRegex).Success) { 
-//                if (EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
-                    // add smart file path to _fileUrls
-                    // replace path with _groupName up to _directoryPath
-                    string fileUrl = file.Replace(_directoryPath, _groupName);
-                    Resource resource = new Resource(fileUrl, file);
-                    _resourceList.Add(resource);
-                    Console.WriteLine("fileUrl = " + resource.localLocation);
+//            foreach (string file in files) {
+//                string extension = Path.GetExtension(file);
+//
+//                if(Regex.Match(extension, extensionsRegex).Success) { 
+////                if (EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
+//                    // add smart file path to _fileUrls
+//                    // replace path with _groupName up to _directoryPath
+//                    string fileUrl = file.Replace(_directoryPath, _groupName);
+//                    Resource resource = new Resource(fileUrl, file);
+//                    _resourceList.Add(resource);
+//                    Console.WriteLine("fileUrl = " + resource.localLocation);
+//                }
+//            }
+        }
+
+        private void ProcessFile(string path)
+        {
+            string extension = Path.GetExtension(path);
+
+            if (Regex.Match(extension, extensionsRegex).Success) {
+                //                if (EXTENSIONS.Contains(extension, StringComparer.OrdinalIgnoreCase)) {
+                // add smart file path to _fileUrls
+                // replace path with _groupName up to _directoryPath
+                string fileUrl = path.Replace(_directoryPath, _groupName);
+                Resource resource = new Resource(fileUrl, path);
+                _resourceList.Add(resource);
+                Console.WriteLine("fileUrl = " + resource.localLocation);
+            }
+        }
+        private void ApplyAllFiles(string folder, Action<string> fileAction) {
+            foreach (string file in Directory.GetFiles(folder)) {
+                fileAction(file);
+            }
+            foreach (string subDir in Directory.GetDirectories(folder)) {
+                try {
+                    ApplyAllFiles(subDir, fileAction);
+                } catch {
+                    // swallow, log, whatever
                 }
             }
         }

@@ -90,10 +90,10 @@ namespace InstallationCustomActionLib {
 //            bw.RunWorkerAsync();
 
             Directory.SetCurrentDirectory(path);
-            filename = this.Context.Parameters["targetdir"] + "lib\\TrayApp.exe";
+            filename = this.Context.Parameters["targetdir"] + "lib\\HalaTrayApp.exe";
             Process.Start(filename);
 
-            filename = this.Context.Parameters["targetdir"] + "lib\\MediaLoaderWPF1.exe";
+            filename = this.Context.Parameters["targetdir"] + "lib\\Hala.exe";
             Process.Start(filename);
 
         }

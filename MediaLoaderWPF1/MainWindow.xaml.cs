@@ -27,6 +27,17 @@ namespace MediaLoaderWPF1 {
 
 //            new NetworkDemo();
 
+            ConfigMessage();
+
+        }
+
+        public void ConfigMessage()
+        {
+            if (userFileSelections.fileSelections.Count > 0) {
+                AddFoldersLabel.Visibility = Visibility.Hidden;
+            } else {
+                AddFoldersLabel.Visibility = Visibility.Visible;
+            }
         }
 
         public void SaveUserSelections() {
@@ -38,10 +49,13 @@ namespace MediaLoaderWPF1 {
             // remove panel from directoriesPanel at index
             directoriesPanel.Children.RemoveAt(index);
             userFileSelections.SaveToFile();
+            ConfigMessage();
         }
 
         public void OnFileSelectionChanged(FileSelection fileSelection) {
             UpdateModel(fileSelection);
+
+            ConfigMessage();
 
         }
 
@@ -63,6 +77,7 @@ namespace MediaLoaderWPF1 {
 
             if (dlg.ShowDialog() == CommonFileDialogResult.Ok) {
                 var folder = dlg.FileName;
+
                 AddDirectory(folder);
             }
         }
@@ -79,9 +94,7 @@ namespace MediaLoaderWPF1 {
 
 
             UpdateModel(fileSelection);
-//            fileSelection.CreateThumbnails();
-//
-//            userFileSelections.SaveToFile();
+            ConfigMessage();
 
         }
 
@@ -106,6 +119,7 @@ namespace MediaLoaderWPF1 {
 
         private void UpdateModel(FileSelection fileSelection)
         {
+
             if (!fileSelection.HasAllThumbnails())
             {
                 _backgroundWorker = new BackgroundWorker();

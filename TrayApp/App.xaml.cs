@@ -47,7 +47,7 @@ namespace TrayApp {
 //                RegistryKey rk = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
                 RegistryKey rk = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
 
-                rk.SetValue("dog-pc-sync", System.Reflection.Assembly.GetExecutingAssembly().Location);
+                rk.SetValue("hala-tray-app", System.Reflection.Assembly.GetExecutingAssembly().Location);
                 File.AppendAllText(UserFileSelections.logFile, @" added to registery - ");
             }
             catch (Exception e)
