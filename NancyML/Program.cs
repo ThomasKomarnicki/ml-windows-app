@@ -64,9 +64,9 @@ namespace NancyML {
                 
                 x.RunAsLocalSystem();
                 x.StartAutomatically();
-                x.SetDescription("PC Sync Service");
-                x.SetDisplayName("PC Sync Service");
-                x.SetServiceName("PCSyncService");
+                x.SetDescription("Home Theater Service");
+                x.SetDisplayName("Home Theater Service");
+                x.SetServiceName("HomeTheaterService");
             });
             host.Run();
 
@@ -78,14 +78,14 @@ namespace NancyML {
 //        private NancyHost _nancyHost;
 
         public void Start() {
-            File.AppendAllText(UserFileSelections.logFile, @"service started - ");
+//            File.AppendAllText(UserFileSelections.logFile, @"service started - ");
 
         }
 
         public void Stop() {
             //            _nancyHost.Stop();
             //            Console.WriteLine("Stopped. Good bye!");
-            File.AppendAllText(UserFileSelections.logFile, @"service stopped - ");
+//            File.AppendAllText(UserFileSelections.logFile, @"service stopped - ");
         }
     }
 

@@ -90,10 +90,10 @@ namespace InstallationCustomActionLib {
 //            bw.RunWorkerAsync();
 
             Directory.SetCurrentDirectory(path);
-            filename = this.Context.Parameters["targetdir"] + "lib\\HalaTrayApp.exe";
+            filename = this.Context.Parameters["targetdir"] + "lib\\HomeTheaterTrayApp.exe";
             Process.Start(filename);
 
-            filename = this.Context.Parameters["targetdir"] + "lib\\Hala.exe";
+            filename = this.Context.Parameters["targetdir"] + "lib\\HomeTheater.exe";
             Process.Start(filename);
 
         }

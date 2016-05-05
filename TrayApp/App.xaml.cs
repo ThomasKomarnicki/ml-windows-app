@@ -47,8 +47,8 @@ namespace TrayApp {
 //                RegistryKey rk = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
                 RegistryKey rk = Registry.LocalMachine.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
 
-                rk.SetValue("hala-tray-app", System.Reflection.Assembly.GetExecutingAssembly().Location);
-                File.AppendAllText(UserFileSelections.logFile, @" added to registery - ");
+                rk.SetValue("ht-tray-app", System.Reflection.Assembly.GetExecutingAssembly().Location);
+//                File.AppendAllText(UserFileSelections.logFile, @" added to registery - ");
             }
             catch (Exception e)
             {

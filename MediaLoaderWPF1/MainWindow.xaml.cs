@@ -82,7 +82,7 @@ namespace MediaLoaderWPF1 {
             }
         }
 
-        private void AddDirectory(String directory) {
+        private void AddDirectory(string directory) {
 
             if (!userFileSelections.Has(directory))
             {

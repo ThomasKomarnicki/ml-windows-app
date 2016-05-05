@@ -6,7 +6,7 @@
         xmlns:tb="http://www.hardcodet.net/taskbar" 
         xmlns:local="clr-namespace:MediaLoaderWPF1"
         mc:Ignorable="d"
-        Title="PC-Sync" Height="347.058" Width="480" MinWidth="520" MaxWidth="520">
+        Title="Home Theater TV" Height="347.058" Width="480" MinWidth="520" MaxWidth="520">
 
     <Window.Resources>
         <Style x:Key="TransparentStyle" TargetType="{x:Type Button}">

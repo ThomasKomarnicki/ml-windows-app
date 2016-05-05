@@ -15,7 +15,7 @@ namespace UserSelectionLibrary.model {
 //        private readonly string appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + "\\MediaLoader\\";
         public static readonly string appDataDir = Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
 
-        public static readonly string logFile = "C:\\PCSyncLog.txt";
+//        public static readonly string logFile = "C:\\HomeTheaterLog.txt";
 
         public List<FileSelection> fileSelections;
 
